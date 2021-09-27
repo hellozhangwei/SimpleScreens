@@ -24,11 +24,14 @@ along with this software (see the LICENSE.md file). If not, see
         </if>
     </actions>
     <widgets>
-        <container style="row q-my-md">
-            <label text="AssetNameTemplate" text-map="asset" type="span" condition="asset" style="text-h3"/>
-            <label text=": ${product.productName}" type="span" condition="product" style="text-h3" />
-        </container>
-
+        <section name="Xxx" condition="asset || product">
+            <widgets>
+                <container style="row q-my-md" >
+                    <label text="AssetNameTemplate" text-map="asset" type="span" condition="asset" style="text-h3"/>
+                    <label text=": ${product.productName}" type="span" condition="product" style="text-h3" />
+                </container>
+            </widgets>
+        </section>
         <subscreens-panel id="AssetPanel" type="tab"/>
     </widgets>
 </screen>

@@ -36,7 +36,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="getContainerList" location="component://SimpleScreens/template/facility/FacilityTransitions.xml"/>
 
     <widgets>
-        <label text="Individual Assets"  style="row q-mb-md text-h3"/>
+        <label text="Individual Assets"  style="row q-my-md text-h3"/>
 
         <container style="q-mb-sm">
         <link url="../FindSummary" text="Asset Summary Find"/>
