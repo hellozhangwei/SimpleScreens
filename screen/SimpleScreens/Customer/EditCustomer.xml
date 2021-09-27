@@ -145,6 +145,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <container-row><row-col lg="6">
+            <container style="q-ma-sm">
             <link url="findRequest" text="Requests" badge="${requestCount}" parameter-map="[partyId:partyId]"/>
             <link url="findOrder" text="Orders" badge="${customerOrderPartCount}" parameter-map="[customerPartyId:partyId]"/>
             <link url="findShipment" text="Shipments To" badge="${toShipmentCount}" parameter-map="[toPartyId:partyId]"/>
@@ -153,6 +154,7 @@ along with this software (see the LICENSE.md file). If not, see
             <section-include name="NonUserPerson" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
             <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960"/>
+            </container>
             <section-include name="HasDuplicatesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
             <section-include name="EditPartySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>

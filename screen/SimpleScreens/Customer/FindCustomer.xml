@@ -41,6 +41,7 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="mantle.party.PartyServices.search#Party" in-map="context" out-map="context"/>
     </actions>
     <widgets>
+        <container style="q-mb-sm">
         <container-dialog id="CreatePersonDialog" button-text="New Person Customer">
             <form-single name="CreatePersonForm" transition="createPersonCustomer"
                     extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreatePersonCustForm">
@@ -64,10 +65,14 @@ along with this software (see the LICENSE.md file). If not, see
         </container-dialog>
 
         <link url="../CustomerData" text="Customer Data"/>
+        </container>
 
+        <container style="q-mb-sm">
         <link url="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax"
-                url-type="plain" link-type="anchor" target-window="_blank" text="Search String Reference"/>
-        <form-single name="OuterSearchForm" extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#OuterSearchForm"/>
+                          url-type="plain" link-type="anchor" target-window="_blank" text="Search String Reference"/>
+        </container>
+
+        <form-single name="OuterSearchForm" extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#OuterSearchForm" container-style="q-mb-sm rounded-borders"/>
 
         <form-list name="CustomerListForm" list="documentList" skip-form="true" header-dialog="true"
                 extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#PartyListForm">
