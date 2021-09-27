@@ -24,8 +24,11 @@ along with this software (see the LICENSE.md file). If not, see
         </if>
     </actions>
     <widgets>
-        <label text="AssetNameTemplate" text-map="asset" type="strong" condition="asset"/>
-        <label text=": ${product.productName}" type="strong" condition="product"/>
+        <container style="row q-my-md">
+            <label text="AssetNameTemplate" text-map="asset" type="span" condition="asset" style="text-h3"/>
+            <label text=": ${product.productName}" type="span" condition="product" style="text-h3" />
+        </container>
+
         <subscreens-panel id="AssetPanel" type="tab"/>
     </widgets>
 </screen>

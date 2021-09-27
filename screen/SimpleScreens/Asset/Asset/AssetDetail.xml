@@ -41,7 +41,7 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="statusChangeTransition" value="updateAsset"/>
     </actions>
     <widgets>
-        <container-row><row-col lg="5">
+        <container-row><row-col lg="5"><container style="q-mb-sm">
             <link url="findTransactionEntry" text="TX Entries" link-type="anchor-button" parameter-map="[assetId:assetId]"/>
             <link url="checkAssetReservations" text="Check Reservations" parameter-map="[assetId:assetId]"/>
             <container-dialog id="UpdateCostDialog" button-text="Update Cost &amp; Owner">
@@ -77,8 +77,8 @@ along with this software (see the LICENSE.md file). If not, see
                         <display text="${ec.entity.formatFieldString(changedEntityName, changedFieldName, newValueText)}"/></default-field></field>
                 </form-list>
             </container-dialog>
-
-            <form-single name="EditAsset" map="asset" transition="updateAsset">
+            </container>
+            <form-single name="EditAsset" map="asset" transition="updateAsset" container-style="rounded-borders">
                 <field name="assetId"><default-field><display/></default-field></field>
 
                 <field name="assetTypeEnumId"><default-field title="Type">

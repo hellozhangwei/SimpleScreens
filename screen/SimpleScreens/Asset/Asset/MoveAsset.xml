@@ -51,8 +51,8 @@ along with this software (see the LICENSE.md file). If not, see
         </if>
     </actions>
     <widgets>
-        <label text="Move Asset ${assetId}" type="h4"/>
-        <form-single name="AssetInfoForm" map="asset">
+        <label text="Move Asset ${assetId}" type="h4" style="q-mx-xs q-mb-md"/>
+        <form-single name="AssetInfoForm" map="asset" container-style="q-mx-xs rounded-borders">
             <field name="productId"><default-field title="Product">
                 <link url="editProduct" entity-name="mantle.product.Product" text="ProductNameTemplate" link-type="anchor"/>
             </default-field></field>
@@ -82,7 +82,7 @@ along with this software (see the LICENSE.md file). If not, see
         </form-single>
 
         <container-row><row-col md="6">
-            <form-single name="ScanMoveAssetForm" transition="completeMove" focus-field="scanLocation">
+            <form-single name="ScanMoveAssetForm" transition="completeMove" focus-field="scanLocation" container-style="rounded-borders">
                 <field name="assetId"><default-field><hidden/></default-field></field>
                 <field name="facilityId"><default-field title="Facility">
                     <drop-down allow-empty="true"><dynamic-options transition="getFacilityList" server-search="true" min-length="0"/></drop-down>
@@ -96,7 +96,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field name="submitButton"><default-field title="Move Asset"><submit/></default-field></field>
             </form-single>
         </row-col><row-col md="6">
-            <form-single name="EnterMoveAssetForm" transition="completeMove">
+            <form-single name="EnterMoveAssetForm" transition="completeMove" container-style="rounded-borders">
                 <field name="assetId"><default-field><hidden/></default-field></field>
                 <field name="facilityId"><default-field title="Facility"><drop-down allow-empty="true">
                     <dynamic-options transition="getFacilityList" server-search="true" min-length="0"/>
