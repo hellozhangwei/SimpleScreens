@@ -334,7 +334,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="editInvoice" text="Invoice ${invoiceId}" link-type="anchor-button"/>
                 </widgets></section-iterate>
                 </container>
-                <form-single name="HeaderForm" transition="updateOrderHeader" map="orderHeader">
+                <form-single name="HeaderForm" transition="updateOrderHeader" map="orderHeader" container-style="q-ma-sm rounded-borders">
                     <field name="orderId"><default-field><hidden/></default-field></field>
 
                     <field name="parentOrderId"><conditional-field title="Parent Order" condition="parentOrderId">
