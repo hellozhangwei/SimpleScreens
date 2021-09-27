@@ -247,8 +247,8 @@ along with this software (see the LICENSE.md file). If not, see
             </field>
             <field name="countryGeoId">
                 <conditional-field condition="createPostal || postalContactMechPurposeId" title="">
-                    <drop-down no-current-selected-key="${ec.user.getPreference('PostalAddress.DefaultCountry') ?: 'USA'}">
-                        <entity-options key="${geoId}" text="${geoName}">
+                    <drop-down no-current-selected-key="${ec.user.getPreference('PostalAddress.DefaultCountry') ?: 'CHN'}">
+                        <entity-options key="${geoId}" text="${ec.l10n.localize(geoName)}">
                             <entity-find entity-name="moqui.basic.Geo" list="geoList">
                                 <econdition field-name="geoTypeEnumId" value="GEOT_COUNTRY"/>
                                 <order-by field-name="geoName"/>
@@ -524,7 +524,7 @@ along with this software (see the LICENSE.md file). If not, see
 
             <field name="countryGeoId"><default-field title="">
                 <drop-down no-current-selected-key="USA">
-                    <entity-options key="${geoId}" text="${geoName}">
+                    <entity-options key="${geoId}" text="${ec.l10n.localize(geoName)}">
                         <entity-find entity-name="moqui.basic.Geo" list="geoList">
                             <econdition field-name="geoTypeEnumId" value="GEOT_COUNTRY"/>
                             <order-by field-name="geoName"/></entity-find>
