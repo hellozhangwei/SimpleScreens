@@ -201,7 +201,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 </drop-down></default-field></field>
                                 <field name="weightUomId"><default-field title="Weight UOM">
                                     <drop-down allow-empty="true" no-current-selected-key="WT_lb">
-                                        <entity-options key="${uomId}" text="${description} (${abbreviation})">
+                                        <entity-options key="${uomId}" text="${ec.l10n.localize(description)} (${abbreviation})">
                                             <entity-find entity-name="moqui.basic.Uom">
                                                 <econdition field-name="uomTypeEnumId" value="UT_WEIGHT_MEASURE"/>
                                                 <order-by field-name="description"/></entity-find></entity-options>
