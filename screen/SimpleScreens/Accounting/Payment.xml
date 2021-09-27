@@ -18,6 +18,8 @@ along with this software (see the LICENSE.md file). If not, see
 
     <subscreens default-item="FindPayment"/>
     <widgets>
+        <link url="FindPayment" text="Return to Find Payment" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="paymentId"/>
+        <label text="${ec.l10n.localize('Payment')}: ${paymentId}" type="div" condition="paymentId" style="row q-mb-md text-h3"/>
         <subscreens-active/>
     </widgets>
 </screen>
