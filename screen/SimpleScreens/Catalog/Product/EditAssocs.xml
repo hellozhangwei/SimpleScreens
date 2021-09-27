@@ -69,7 +69,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
                     </form-single>
                 </container-dialog>
-            </box-toolbar><box-body>
+            </box-toolbar><box-body-nopad>
                 <form-list name="AssocToListForm" list="paatList" transition="updateProductAssoc" paginate="true">
                     <field name="productId"><default-field><hidden/></default-field></field>
                     <field name="toProductId"><default-field title="Product"><display text=" "/>
@@ -90,9 +90,9 @@ along with this software (see the LICENSE.md file). If not, see
                             fromDate:fromDate, thruDate:ec.user.nowTimestamp]" confirmation="Remove this association?"/>
                     </default-field></field>
                 </form-list>
-            </box-body></container-box>
+            </box-body-nopad></container-box>
 
-            <container-box><box-header title="Associated From"/><box-body>
+            <container-box><box-header title="Associated From"/><box-body-nopad>
                 <form-list name="AssocFromListForm" list="paafList" skip-form="true">
                     <field name="productId"><default-field title="Product">
                         <link url="editProduct" text="${productName} [${pseudoId}]" parameter-map="[productId:productId]" link-type="anchor"/>
@@ -105,7 +105,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </default-field></field>
                     <field name="quantity"><default-field title="Qty"><display format="0.######"/></default-field></field>
                 </form-list>
-            </box-body></container-box>
+            </box-body-nopad></container-box>
         </row-col><row-col lg="5">
             <container-box><box-header title="Selectable Features"/><box-toolbar>
                 <container-dialog id="CreateVariantsDialog" button-text="Create Variants">
@@ -128,7 +128,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="submitButton"><default-field title="Create All Variants"><submit/></default-field></field>
                     </form-single>
                 </container-dialog>
-            </box-toolbar><box-body>
+            </box-toolbar><box-body-nopad>
                 <form-list name="AllSelectableFeaturesForm" list="selectableFeatureList" skip-form="true">
                     <row-actions>
                         <if condition="selectableFeatureList_entry.getEntityName() == 'mantle.product.feature.ProductFeatureAndGroupAppl'">
@@ -146,7 +146,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <default-field title="Feature Group"><display text=""/></default-field>
                     </field>
                 </form-list>
-            </box-body></container-box>
+            </box-body-nopad></container-box>
         </row-col></container-row>
     </widgets>
 </screen>

@@ -280,7 +280,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </container-dialog>
             </box-toolbar>
-            <box-body>
+            <box-body-nopad>
                 <form-list name="UpdateAssignForm" list="weapdList" transition="updateAssignment">
                     <row-actions>
                         <entity-find-one entity-name="moqui.basic.StatusItem" value-field="currentStatus"/>
@@ -301,7 +301,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </default-field></field>
                     <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
                 </form-list>
-            </box-body>
+            </box-body-nopad>
         </container-box>
         <container-box>
             <box-header title="Equipment"/>
@@ -322,7 +322,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </container-dialog>
             </box-toolbar>
-            <box-body>
+            <box-body-nopad>
                 <section-iterate name="AssetListSection" list="assetList" entry="assetAssign">
                     <actions>
                         <script>context.putAll(assetAssign)</script>
@@ -366,7 +366,7 @@ along with this software (see the LICENSE.md file). If not, see
                         </container-box>
                     </widgets>
                 </section-iterate>
-            </box-body>
+            </box-body-nopad>
         </container-box>
     </widgets>
 </screen>

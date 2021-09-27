@@ -84,7 +84,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="contentText"><default-field title=""><text-area cols="110" rows="15" editor-type="html"/></default-field></field>
                 </form-single>
             </container-dialog>
-        </box-toolbar><box-body>
+        </box-toolbar><box-body-nopad>
             <form-list name="ContentList" list="contentList" skip-form="true" header-dialog="true">
                 <field name="download"><default-field title="">
                     <link url="downloadContent" text="Download" condition="contentLocation" tooltip="${contentLocation}"/>
@@ -133,6 +133,6 @@ along with this software (see the LICENSE.md file). If not, see
                 <form-list-column><field-ref name="fromDate"/><field-ref name="thruDate"/></form-list-column>
                 <form-list-column><field-ref name="description"/><field-ref name="contentLocation"/></form-list-column>
             </form-list>
-        </box-body></container-box>
+        </box-body-nopad></container-box>
     </widgets>
 </screen>

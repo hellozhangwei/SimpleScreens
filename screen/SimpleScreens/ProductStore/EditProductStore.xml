@@ -185,7 +185,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </form-single>
                         </container-dialog>
                     </box-toolbar>
-                    <box-body>
+                    <box-body-nopad>
                         <form-list name="ShipOptionsForm" list="shipOptionsList" multi="true" transition="updateShippingOption">
                             <entity-find entity-name="mantle.product.store.ProductStoreShipOptionDetail" list="shipOptionsList">
                                 <econdition field-name="productStoreId"/>
@@ -210,7 +210,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </default-field></field>
                             <field name="submitButton" align="right"><default-field title="Update"><submit/></default-field></field>
                         </form-list>
-                    </box-body></container-box>
+                    </box-body-nopad></container-box>
                 </widgets>
             </section>
 
@@ -257,7 +257,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
                             </form-single>
                         </container-dialog></box-toolbar>
-                        <box-body>
+                        <box-body-nopad>
                             <form-list name="ShippingGatewaysForm" list="shippingGatewayList" transition="updateShippingGateway">
                                 <entity-find entity-name="mantle.product.store.ProductStoreShippingGateway" list="shippingGatewayList">
                                     <econdition field-name="productStoreId"/>
@@ -308,7 +308,7 @@ along with this software (see the LICENSE.md file). If not, see
                                     <column><field-ref name="submitButton"/><field-ref name="deleteButton"/></column>
                                 </columns>
                             </form-list>
-                        </box-body>
+                        </box-body-nopad>
                     </container-box>
                 </widgets>
             </section>
@@ -343,7 +343,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
                             </form-single>
                         </container-dialog></box-toolbar>
-                        <box-body>
+                        <box-body-nopad>
                             <form-list name="PaymentGatewayForm" list="storePaymentGateway" skip-form="true" header-dialog="false" select-columns="false" saved-finds="false" show-csv-button="false">
                                 <field name="paymentInstrumentEnumId"><default-field title="Instrument">
                                     <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
@@ -358,7 +358,7 @@ along with this software (see the LICENSE.md file). If not, see
                                           confirmation="Are you sure you want to remove this Payment Gateway?"/>
                                 </default-field></field>
                             </form-list>
-                        </box-body>
+                        </box-body-nopad>
                     </container-box>
                 </widgets>
             </section>
