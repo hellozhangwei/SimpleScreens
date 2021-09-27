@@ -27,6 +27,7 @@ along with this software (see the LICENSE.md file). If not, see
             <search-form-inputs default-order-by="facilityName"/></entity-find>
     </actions>
     <widgets>
+        <container style="q-mb-sm">
         <container-dialog id="NewFacilityDialog" button-text="New Facility">
             <form-single name="NewFacilityForm" transition="createFacility">
                 <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
@@ -43,7 +44,7 @@ along with this software (see the LICENSE.md file). If not, see
         </container-dialog>
         <link url="../BoxTypes" text="Box Types"/>
         <link url="../CarrierShipMethods" text="Carrier Ship Methods"/>
-
+        </container>
         <form-list name="FacilityListForm" list="facilityList" skip-form="true" header-dialog="true" select-columns="true"
                    saved-finds="true" show-csv-button="true">
             <field name="pseudoId">

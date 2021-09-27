@@ -64,7 +64,7 @@ along with this software (see the LICENSE.md file). If not, see
         <container-row><row-col md="7">
             <label text="Request #${requestId}" type="h4"/>
 
-            <form-single name="EditRequest" transition="updateRequest" map="request">
+            <form-single name="EditRequest" transition="updateRequest" map="request" container-style="q-ma-sm rounded-borders">
                 <field name="requestId"><default-field title="Request ID"><display/></default-field></field>
                 <field name="requestDate"><default-field><display/></default-field></field>
                 <field name="filedByPartyId"><default-field title="Filed By">

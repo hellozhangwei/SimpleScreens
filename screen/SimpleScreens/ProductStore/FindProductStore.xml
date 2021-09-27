@@ -26,6 +26,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
 
     <widgets>
+        <container style="q-mb-sm">
         <container-dialog id="NewStoreDialog" button-text="New Store">
             <form-single name="NewStoreForm" transition="createStore">
                 <field name="productStoreId"><default-field title="ID"><text-line size="20"/></default-field></field>
@@ -45,7 +46,7 @@ along with this software (see the LICENSE.md file). If not, see
 
         <link url="//${appRoot}/Gateway/Payment" text="Payment Gateways"/>
         <link url="//${appRoot}/Gateway/Shipping" text="Shipping Gateways"/>
-
+        </container>
         <form-list name="StoresForm" list="storeList" skip-form="true" header-dialog="true" select-columns="true"
                    saved-finds="true" show-csv-button="true">
             <field name="productStoreId">

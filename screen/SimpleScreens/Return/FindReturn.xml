@@ -40,6 +40,7 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="defaultFacilityId" from="ec.user.getPreference('FacilityGeneralDefault')"/>
     </actions>
     <widgets>
+        <container style="q-mb-sm">
         <container-dialog id="CreateReturnDialog" button-text="Create Customer Return">
             <form-single name="CreateReturn" transition="createReturn">
                 <field name="customerPartyId"><default-field title="Customer"><drop-down>
@@ -84,7 +85,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
             </form-single>
         </container-dialog>
-
+        </container>
         <form-list name="ReturnHeaderList" list="returnHeaderList" skip-form="true" header-dialog="true" saved-finds="true">
             <entity-find entity-name="mantle.order.return.ReturnHeaderDetail" list="returnHeaderList" distinct="true" use-clone="true">
                 <search-form-inputs default-order-by="-entryDate,returnId" skip-fields="orderId">
