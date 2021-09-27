@@ -28,6 +28,7 @@ along with this software (see the LICENSE.md file). If not, see
             <else-if condition="'outgoing'.equalsIgnoreCase(paymentType)"><set field="fromRoleTypeId" value="OrgInternal"/></else-if></if>
     </actions>
     <widgets>
+        <container style="q-mb-sm">
         <container-dialog id="NewInPaymentDialog" button-text="New Incoming Payment">
             <form-single name="NewInPaymentForm" transition="createPayment">
                 <field name="fromPartyId"><default-field title="From">
@@ -79,7 +80,7 @@ along with this software (see the LICENSE.md file). If not, see
         </container-dialog>
 
         <link url="../BulkPaymentCheck" text="Bulk Checks"/>
-
+        </container>
         <form-list name="PaymentList" list="paymentList" skip-form="true" header-dialog="true" select-columns="true"
                saved-finds="true" show-csv-button="true" show-xlsx-button="true" show-all-button="true">
             <entity-find entity-name="mantle.account.payment.PaymentFindView" list="paymentList" use-clone="true">

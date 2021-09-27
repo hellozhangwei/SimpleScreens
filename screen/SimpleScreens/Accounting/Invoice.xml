@@ -19,6 +19,8 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="FindInvoice"/>
 
     <widgets>
+        <link url="FindInvoice" text="Return to Find Invoice" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="invoiceId"/>
+        <label text="${ec.l10n.localize('Invoice')}: ${invoiceId}" type="div" condition="invoiceId" style="row q-mb-md text-h3"/>
         <subscreens-panel id="invoice-panel" type="tab"/>
     </widgets>
 </screen>

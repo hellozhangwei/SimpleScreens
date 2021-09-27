@@ -95,7 +95,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container-dialog>
             </box-body></container-box>
             <container-box><box-header title="Sales and Invoice Reports"/><box-body>
-                <container>
+                <container style="q-mb-sm">
                     <link url="../SalesSummary" text="Sales Summary"/>
                     <link url="../SalesAnalysis" text="Sales Order Analysis"/>
                     <link url="../SalesInvoiceAnalysis" text="Sales Invoice Analysis"/>
@@ -120,7 +120,7 @@ along with this software (see the LICENSE.md file). If not, see
                         </form-single>
                     </container-dialog>
                 </container>
-                <container>
+                <container style="q-mb-sm">
                     <link url="../OrderItemSummary" text="Order Item Summary"/>
                     <link url="../OrderIssuedInvoiced" text="Order Issued and Invoiced"/>
                     <link url="../InvoiceItemSummary" text="Invoice Item Summary"/>
@@ -134,6 +134,8 @@ along with this software (see the LICENSE.md file). If not, see
             </box-body></container-box>
         </row-col><row-col md="6">
             <container-box><box-header title="Transaction Reports"/><box-body>
+                <container style="q-mb-sm">
+
                 <container-dialog id="AccountLedgerDialog" button-text="Account Ledger">
                     <form-single name="AccountLedgerForm" transition="../AccountLedger">
                         <field name="organizationPartyId"><default-field title="Organization">
@@ -179,8 +181,8 @@ along with this software (see the LICENSE.md file). If not, see
                 </container-dialog>
                 <link url="../../Transaction" text="Transactions"/>
                 <link url="../../Transaction/FindTransactionEntry" text="Transaction Entries"/>
-
-                <container>
+                </container>
+                <container style="q-mb-sm">
                     <container-dialog id="PostedAmountSummaryDialog" button-text="Posted Amount Summary">
                         <form-single name="PostedAmountSummaryForm" transition="viewPostedAmountSummary">
                             <field name="organizationPartyId"><default-field title="Organization">
@@ -217,7 +219,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container>
             </box-body></container-box>
             <container-box><box-header title="Asset and Inventory Reports"/><box-body>
-                <container>
+                <container style="q-mb-sm">
                     <link url="../AssetValuation" text="Inventory Valuation"/>
                     <link url="../AssetReceiptTransaction" text="Receipt Transactions"/>
                     <link url="../AssetStatusByReceipt" text="Status by Receipt"/>

@@ -51,7 +51,7 @@ along with this software (see the LICENSE.md file). If not, see
         </if>
     </actions>
     <widgets>
-        <container>
+        <container style="q-ma-sm">
             <label text="Search + Lookup by ID" type="strong"/>
             <label text=" for Asset, Facility, Invoice, Order, Return, Party, Badge, Payment, Product, Shipment, Work Effort (Project, Task, Picklist, Production Run), GL Transaction"/>
         </container>
