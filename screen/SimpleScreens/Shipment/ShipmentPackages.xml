@@ -119,8 +119,8 @@ along with this software (see the LICENSE.md file). If not, see
                     ((shipment.statusId == 'ShipScheduled' &amp;&amp; hasNoItems) || (shipment.statusId in ['ShipPacked', 'ShipShipped']))"><widgets>
                     <link url="requestShipmentLabels" text="Get Labels" condition="destContactMechValid"/>
                     <container-dialog id="RequestLabelsDialog" button-text="Get Labels" type="warning" condition="!destContactMechValid">
-                        <label text="Warning: destination address is incomplete or invalid according to address validation." style="text-warning"/>
-                        <link url="requestShipmentLabels" text="Get Labels Anyway"/>
+                        <label text="Warning: destination address is incomplete or invalid according to address validation." type="div" style="q-pa-md bg-warning"/>
+                        <link url="requestShipmentLabels" text="Get Labels Anyway" style="q-ma-md"/>
                     </container-dialog>
                 </widgets></section>
                 <link url="trackShipmentLabels" text="Track Labels" condition="shippingGatewayConfigId &amp;&amp; hasAnyLabels"/>
@@ -165,7 +165,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <link url="createShipmentAutoPackages" text="Auto Packages" condition="shippingGatewayConfig?.getAutoPackageInfoName"
                     parameter-map="[resetExisting:true]" confirmation="Remove existing packages and create new based on auto-package data?"/>
                 <link url="createPackage" text="Add Package"/>
-            </box-toolbar><box-body>
+            </box-toolbar><box-body-nopad>
                 <form-single name="PackageOptionsForm" transition="." pass-through-parameters="true">
                     <field name="filterProductId"><default-field title="Product"><drop-down allow-empty="true">
                         <list-options list="allProductList" key="${productId}" text="ProductNameTemplate"/>
@@ -226,10 +226,10 @@ along with this software (see the LICENSE.md file). If not, see
                                     shipmentRouteSegmentSeqId:packageRouteSeg.shipmentRouteSegmentSeqId]"/>
                         <container-dialog id="RequestPkgLabelDialog" button-text="Get Label" type="warning"
                                 condition="shippingGatewayConfigId &amp;&amp; !hasLabel &amp;&amp; !destContactMechValid">
-                            <label text="Warning: destination address is incomplete or invalid according to address validation." style="text-warning"/>
+                            <label text="Warning: destination address is incomplete or invalid according to address validation." type="div" style="q-pa-md bg-warning"/>
                             <link url="requestShipmentLabels" text="Get Label Anyway"
                                     parameter-map="[shipmentId:shipmentId, shipmentPackageSeqId:shipmentPackage.shipmentPackageSeqId,
-                                        shipmentRouteSegmentSeqId:packageRouteSeg.shipmentRouteSegmentSeqId]"/>
+                                        shipmentRouteSegmentSeqId:packageRouteSeg.shipmentRouteSegmentSeqId]" style="q-ma-md"/>
                         </container-dialog>
 
                         <container-dialog id="RequestRetLabelDialog" button-text="Get Return Label"
@@ -413,7 +413,7 @@ along with this software (see the LICENSE.md file). If not, see
                         </form-list>
                     </box-body-nopad></container-box>
                 </widgets></section-iterate>
-            </box-body></container-box>
+            </box-body-nopad></container-box>
         </widgets></section>
     </widgets>
 </screen>
