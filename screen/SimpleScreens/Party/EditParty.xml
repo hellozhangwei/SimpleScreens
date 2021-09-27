@@ -205,7 +205,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <set field="emailAddress" from="primaryEmailList?.first?.infoString"/>
             </actions><widgets>
                 <container-dialog id="CreateUserAccountDialog" button-text="Create User" type="success">
-                    <label text="User must change password before first login, even if password is set here." type="p"/>
+                    <label text="User must change password before first login, even if password is set here." type="div" style="q-pa-md bg-warning"/>
                     <form-single name="CreateUserAccount" transition="createUserAccount">
                         <field name="partyId"><default-field><hidden/></default-field></field>
                         <field name="username"><default-field><text-line size="20"/></default-field></field>
@@ -226,7 +226,7 @@ along with this software (see the LICENSE.md file). If not, see
             </widgets></section>
 
             <section name="ConvertPartySection" condition="party?.partyTypeEnumId == 'PtyOrganization'"><widgets>
-                <container-dialog id="ConvertToPersonSection" button-text="Convert To Person">
+                <container-dialog id="ConvertToPersonSection" button-text="Convert To Person" button-flat="true">
                     <form-single name="ConvertToPersonForm" map="party" transition="convertPartyToPerson">
                         <field name="partyId"><default-field><hidden/></default-field></field>
                         <field name="firstName" from="party.organizationName.contains(' ') ? party.organizationName.substring(0, party.organizationName.lastIndexOf(' ')) : party.organizationName">
@@ -239,7 +239,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </container-dialog>
             </widgets><fail-widgets>
-                <container-dialog id="ConvertToOrganizationSection" button-text="Convert To Organization">
+                <container-dialog id="ConvertToOrganizationSection" button-text="Convert To Organization" button-flat="true">
                     <form-single name="ConvertToOrganizationForm" map="party" transition="convertPartyToOrganization">
                         <field name="partyId"><default-field><hidden/></default-field></field>
                         <field name="organizationName"><default-field>
@@ -249,7 +249,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container-dialog>
             </fail-widgets></section>
 
-            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960" type="warning"/>
+            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960" type="warning" button-flat="true"/>
 
             <section name="HasDuplicatesSection"><actions>
                 <if condition="party.hasDuplicates != 'Y'"><service-call name="mantle.party.DuplicateServices.find#PartyHasDuplicates"
@@ -262,7 +262,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <container><link url="." text="This party was merged into ${party.mergedToPartyId}" link-type="anchor"
                         parameter-map="[partyId:party.mergedToPartyId]" condition="party.mergedToPartyId"/></container>
                 <container>
-                    <label text="This party has data merged from parties: " condition="mergedFromList"/>
+                    <label text="This party has data merged from parties:" condition="mergedFromList"/>
                     <section-iterate name="MergedFromList" list="mergedFromList" entry="mergedFrom"><widgets>
                         <link url="." text="${mergedFrom.partyId} " link-type="anchor"
                                 parameter-map="[partyId:mergedFrom.partyId]"/>
@@ -271,7 +271,7 @@ along with this software (see the LICENSE.md file). If not, see
             </widgets></section>
 
             <section name="EditPartySection" condition="party?.partyTypeEnumId == 'PtyOrganization'"><widgets>
-                <form-single name="EditOrganizationForm" map="party" transition="updateParty">
+                <form-single name="EditOrganizationForm" map="party" transition="updateParty" container-style="q-mb-sm rounded-borders">
                     <field name="partyId"><default-field><hidden/></default-field></field>
                     <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
                     <field name="organizationName"><default-field><text-line size="60"/></default-field></field>
@@ -302,7 +302,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="submitButton"><default-field title="Update Organization"><submit/></default-field></field>
                 </form-single>
             </widgets><fail-widgets>
-                <form-single name="EditPersonForm" map="party" transition="updateParty">
+                <form-single name="EditPersonForm" map="party" transition="updateParty" container-style="q-mb-sm rounded-borders">
                     <field name="partyId"><default-field><hidden/></default-field></field>
                     <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
                     <field name="firstName"><default-field><text-line size="30"/></default-field></field>
@@ -351,9 +351,11 @@ along with this software (see the LICENSE.md file). If not, see
                     <econdition field-name="partyId"/></entity-find>
             </actions><widgets>
                 <container-box type="warning"><box-header title="Roles"/><box-toolbar>
-                    <container-dialog id="AddDirectRoleDialog" button-text="Add Direct Role">
+                    <container-dialog id="AddDirectRoleDialog" button-text="Add Direct Role" button-flat="true">
+                        <container style="q-pa-md bg-warning">
                         <label text="Roles applied directly describe how the system should treat the Party, or what the Party is to users of the system." type="p"/>
                         <label text="These Roles enable system functionality when directly applied to a Party." type="p"/>
+                        </container>
                         <form-single name="AddDirectRoleForm" transition="createPartyRole">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="roleTypeId"><default-field title="Role"><drop-down>
@@ -366,9 +368,11 @@ along with this software (see the LICENSE.md file). If not, see
                             <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
                         </form-single>
                     </container-dialog>
-                    <container-dialog id="AddOtherRoleDialog" button-text="Add Other Role">
+                    <container-dialog id="AddOtherRoleDialog" button-text="Add Other Role" button-flat="true">
+                        <container style="q-pa-md bg-warning">
                         <label text="Roles applied directly describe how the system should treat the Party, or what the Party is to users of the system." type="p"/>
                         <label text="Any Role may be added here to organize parties for searching, etc but many are used to describe a Party's relationship to, or involvement with, other things in the system and have no effect when applied directly." type="p"/>
+                        </container>
                         <form-single name="AddOtherRoleForm" transition="createPartyRole">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="roleTypeId"><default-field title="Role">
@@ -385,7 +389,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="roleTypeId"><default-field title="Role">
                             <display-entity entity-name="mantle.party.RoleType"/>
                         </default-field></field>
-                        <field name="submitButton"><default-field title=""><submit icon="fa fa-trash" confirmation="Delete role?"/></default-field></field>
+                        <field name="submitButton"><default-field title=""><submit icon="fa fa-trash" confirmation="Delete role?" button-flat="true"/></default-field></field>
                     </form-list>
                 </box-body-nopad></container-box>
             </widgets></section>
@@ -395,7 +399,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <date-filter/><econdition field-name="partyId"/></entity-find>
             </actions><widgets>
                 <container-box type="warning"><box-header title="Classifications"/><box-toolbar>
-                    <container-dialog id="SetClassificationDialog" button-text="Set Classification">
+                    <container-dialog id="SetClassificationDialog" button-text="Set Classification" button-flat="true">
                         <form-single name="SetClassificationForm" transition="setPartyClassification">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="classificationTypeEnumId"><default-field title="Type">
@@ -419,7 +423,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="classificationTypeEnumId"><default-field title="Type">
                             <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
                         <field name="description"><default-field title="Class"><display/></default-field></field>
-                        <field name="submitButton"><default-field title=""><submit icon="fa fa-trash" confirmation="Delete classification?"/></default-field></field>
+                        <field name="submitButton"><default-field title=""><submit icon="fa fa-trash" confirmation="Delete classification?" button-flat="true"/></default-field></field>
                     </form-list>
                 </box-body-nopad></container-box>
             </widgets></section>
@@ -430,7 +434,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <set field="partyIdTypeEnumIds" from="partyIdentificationList.partyIdTypeEnumId"/>
             </actions><widgets>
                 <container-box><box-header title="Identification"/><box-toolbar>
-                    <container-dialog id="AddIdentificationDialog" button-text="Add Identification">
+                    <container-dialog id="AddIdentificationDialog" button-text="Add Identification" button-flat="true">
                         <form-single name="AddIdentificationForm" transition="createPartyIdentification">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="partyIdTypeEnumId"><default-field title="ID Type">
@@ -457,9 +461,9 @@ along with this software (see the LICENSE.md file). If not, see
                         </default-field></field>
                         <field name="idValue"><default-field><text-line size="20"/></default-field></field>
                         <field name="expireDate"><default-field><date-time type="date"/></default-field></field>
-                        <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                        <field name="submitButton"><default-field title="Update"><submit button-flat="true"/></default-field></field>
                         <field name="removeButton"><default-field title="">
-                            <link url="deletePartyIdentification" text=" " icon="fa fa-trash" confirmation="Delete this ID?"/>
+                            <link url="deletePartyIdentification" text=" " icon="fa fa-trash" confirmation="Delete this ID?" button-flat="true"/>
                         </default-field></field>
                     </form-list>
                 </box-body-nopad></container-box>
@@ -470,7 +474,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <econdition field-name="partyId"/><order-by field-name="partySettingTypeId"/></entity-find>
             </actions><widgets>
                 <container-box><box-header title="Settings"/><box-toolbar>
-                    <container-dialog id="AddSettingDialog" button-text="Select Setting">
+                    <container-dialog id="AddSettingDialog" button-text="Select Setting" button-flat="true">
                         <form-single name="AddSettingForm" transition="storePartySetting">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="partySettingTypeId"><default-field title="Type">
@@ -489,7 +493,7 @@ along with this software (see the LICENSE.md file). If not, see
                             <field name="submitButton"><default-field title="Set"><submit/></default-field></field>
                         </form-single>
                     </container-dialog>
-                    <container-dialog id="AddSettingTextDialog" button-text="Enter Setting">
+                    <container-dialog id="AddSettingTextDialog" button-text="Enter Setting" button-flat="true">
                         <form-single name="AddSettingTextForm" transition="storePartySetting">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="partySettingTypeId"><default-field title="Type">
@@ -517,7 +521,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="settingValue"><default-field title="Value">
                             <display text="${valueEnum ? valueEnum.description : settingValue}"/></default-field></field>
                         <field name="submitButton"><default-field title="">
-                            <submit icon="fa fa-trash" confirmation="Really delete setting?"/></default-field></field>
+                            <submit icon="fa fa-trash" confirmation="Really delete setting?" button-flat="true"/></default-field></field>
                     </form-list>
                 </box-body-nopad></container-box>
             </widgets></section>
@@ -528,12 +532,12 @@ along with this software (see the LICENSE.md file). If not, see
                 <order-map-list list="localeStringList"><order-by field-name="name"/></order-map-list>
             </actions><widgets>
                 <container-box><box-header title="User Account"/><box-toolbar>
-                    <link url="systemUserAccount" text="Account Detail" parameter-map="[userId:userAccount.userId]"/>
-                    <link url="enableUserAccount" text="Enable Account" parameter-map="[userId:userAccount.userId]" condition="userAccount.disabled == 'Y'"/>
-                    <link url="disableUserAccount" text="Disable Account" parameter-map="[userId:userAccount.userId]" condition="userAccount.disabled != 'Y'"/>
+                    <link url="systemUserAccount" text="Account Detail" parameter-map="[userId:userAccount.userId]" button-flat="true"/>
+                    <link url="enableUserAccount" text="Enable Account" parameter-map="[userId:userAccount.userId]" condition="userAccount.disabled == 'Y'" button-flat="true"/>
+                    <link url="disableUserAccount" text="Disable Account" parameter-map="[userId:userAccount.userId]" condition="userAccount.disabled != 'Y'" button-flat="true"/>
                     <link url="resetPassword" text="Reset Password" parameter-map="[userId:userAccount.userId]" condition="userAccount.emailAddress"
-                            confirmation="Generate reset password and send by email to ${userAccount.emailAddress}?"/>
-                </box-toolbar><box-body>
+                            confirmation="Generate reset password and send by email to ${userAccount.emailAddress}?" button-flat="true"/>
+                </box-toolbar><box-body-nopad>
                     <form-single name="UpdateUserAccount" map="userAccount" transition="updateUserAccount">
                         <field name="partyId"><default-field><hidden/></default-field></field>
                         <field name="userId"><default-field><hidden/></default-field></field>
@@ -571,7 +575,7 @@ along with this software (see the LICENSE.md file). If not, see
                             <field-ref name="submitButton"/>
                         </field-layout>
                     </form-single>
-                </box-body></container-box>
+                </box-body-nopad></container-box>
             </widgets></section>
             <section name="UserAuthzSection" condition="userAccount"><actions>
                 <entity-find entity-name="moqui.security.UserGroupMember" list="userGroupMemberList">
@@ -585,7 +589,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </entity-find>
             </actions><widgets>
                 <container-box><box-header title="Security Groups"/><box-toolbar>
-                    <container-dialog id="AddGroupDialog" button-text="Add to Group">
+                    <container-dialog id="AddGroupDialog" button-text="Add to Group" button-flat="true">
                         <form-single name="AddGroupForm" transition="createUserGroupMember">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="userId" from="userAccount.userId"><default-field><hidden/></default-field></field>
@@ -609,11 +613,11 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="userGroupId"><default-field title="Group">
                             <display-entity entity-name="moqui.security.UserGroup"/>
                         </default-field></field>
-                        <field name="submitButton" align="right"><default-field title=""><submit icon="fa fa-trash" confirmation="Remove from Group?"/></default-field></field>
+                        <field name="submitButton" align="right"><default-field title=""><submit icon="fa fa-trash" confirmation="Remove from Group?" button-flat="true"/></default-field></field>
                     </form-list>
                 </box-body></container-box>
                 <container-box><box-header title="Internal Organization Relationships"/><box-toolbar>
-                    <container-dialog id="AddOrgDialog" button-text="Add to Organization">
+                    <container-dialog id="AddOrgDialog" button-text="Add to Organization" button-flat="true">
                         <form-single name="NewToRelForm" transition="createPartyRelationship">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="fromPartyId" from="partyId"><default-field><hidden/></default-field></field>
@@ -657,7 +661,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="fromDate"><default-field><display/></default-field></field>
                         <field name="thruDate" from="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
 
-                        <field name="submitButton" align="right"><default-field title=""><submit icon="fa fa-trash" confirmation="Remove from Organization?"/></default-field></field>
+                        <field name="submitButton" align="right"><default-field title=""><submit icon="fa fa-trash" confirmation="Remove from Organization?" button-flat="true"/></default-field></field>
                     </form-list>
                 </box-body></container-box>
             </widgets></section>
@@ -673,7 +677,7 @@ along with this software (see the LICENSE.md file). If not, see
             </actions><widgets>
                 <section name="AccountRelListSection" condition="isSalesContact"><widgets>
                     <container-box><box-header title="Contact of Sales Accounts"/><box-toolbar>
-                        <container-dialog id="AddSalesAccountDialog" button-text="Add to Sales Account">
+                        <container-dialog id="AddSalesAccountDialog" button-text="Add to Sales Account" button-flat="true">
                             <form-single name="AddSalesAccount" transition="addContact">
                                 <field name="partyId"><default-field><hidden/></default-field></field>
                                 <field name="accountPartyId"><default-field title="Sales Account"><drop-down>
@@ -709,7 +713,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </entity-find>
                 </actions><widgets>
                     <container-box><box-header title="Sales Account Contacts"/><box-toolbar>
-                        <container-dialog id="AddContactAssignDialog" button-text="Add Contact">
+                        <container-dialog id="AddContactAssignDialog" button-text="Add Contact" button-flat="true">
                             <form-single name="AddContactAssignForm" transition="addContact">
                                 <field name="partyId" from="contactPartyId"><default-field title="Contact"><drop-down>
                                     <dynamic-options transition="searchPartyList" server-search="true" min-length="2" parameter-map="[roleTypeId:null]"/>
@@ -726,7 +730,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
                             </form-single>
                         </container-dialog>
-                        <container-dialog id="CreateContactDialog" button-text="New Contact">
+                        <container-dialog id="CreateContactDialog" button-text="New Contact" button-flat="true">
                             <form-single name="CreateContactForm" transition="createContact">
                                 <field name="firstName"><default-field><text-line size="30"/></default-field></field>
                                 <field name="lastName"><default-field><text-line size="30"/></default-field></field>
@@ -765,7 +769,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </entity-find>
                 </actions><widgets>
                     <container-box><box-header title="Parent Sales Account"/><box-toolbar>
-                        <container-dialog id="AddParentAccountDialog" button-text="Add Parent Account">
+                        <container-dialog id="AddParentAccountDialog" button-text="Add Parent Account" button-flat="true">
                             <form-single name="AddParentAccount" transition="createPartyRelationship">
                                 <field name="partyId"><default-field><hidden/></default-field></field>
                                 <field name="fromPartyId" from="partyId"><default-field><hidden/></default-field></field>
@@ -798,7 +802,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </entity-find>
                 </actions><widgets>
                     <container-box><box-header title="Child Sales Accounts"/><box-toolbar>
-                        <container-dialog id="AddChildAccountDialog" button-text="Add Child Account">
+                        <container-dialog id="AddChildAccountDialog" button-text="Add Child Account" button-flat="true">
                             <form-single name="AddChildAccount" transition="createPartyRelationship">
                                 <field name="partyId"><default-field><hidden/></default-field></field>
                                 <field name="toPartyId" from="partyId"><default-field><hidden/></default-field></field>
@@ -834,7 +838,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <econdition field-name="partyId"/><order-by field-name="-noteDate"/></entity-find>
             </actions><widgets>
                 <container-box><box-header title="Notes"/><box-toolbar>
-                    <container-dialog id="NewNoteDialog" button-text="Add Note">
+                    <container-dialog id="NewNoteDialog" button-text="Add Note" button-flat="true">
                         <form-single name="NewNoteForm" transition="createPartyNote">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
@@ -848,7 +852,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </actions><widgets>
                         <label text="By ${paua?.firstName?:''} ${paua?.lastName?:''} (${paua?.username ?: partyNote.userId}) at ${ec.l10n.format(partyNote.noteDate, 'yyyy-MM-dd HH:mm')}" type="strong"/>
                         <section name="UpdateNoteSection" condition="partyNote.userId == ec.user.userId || ec.user.isInGroup('ADMIN')"><widgets>
-                            <container-dialog id="UpdateNoteContainer" button-text="Edit Note">
+                            <container-dialog id="UpdateNoteContainer" button-text="Edit Note" button-flat="true">
                                 <form-single name="UpdateNoteForm" transition="updatePartyNote" map="partyNote">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="noteDate"><default-field><hidden/></default-field></field>
@@ -878,16 +882,16 @@ along with this software (see the LICENSE.md file). If not, see
             </actions><widgets>
                 <container-box type="info"><box-header title="Phone, Email, and Other"/><box-toolbar>
                     <dynamic-dialog id="ExpiredOtherDialog" button-text="View Old" transition="ExpiredContactOther"
-                            parameter-map="[partyId:partyId]"/>
+                            parameter-map="[partyId:partyId]" button-flat="true"/>
 
-                    <button-menu text="Add New" icon="fa fa-plus">
+                    <button-menu text="Add New" icon="fa fa-plus" button-flat="true">
                         <dynamic-dialog id="AddPhoneInfo" button-text="Phone" transition="UpdateContactInfo"
-                                parameter-map="[partyId:partyId, createTelecom:'true']"/>
+                                parameter-map="[partyId:partyId, createTelecom:'true']" button-flat="true"/>
                         <dynamic-dialog id="AddEmailInfo" button-text="Email" transition="UpdateContactInfo"
-                                parameter-map="[partyId:partyId, createEmail:'true']"/>
+                                parameter-map="[partyId:partyId, createEmail:'true']" button-flat="true"/>
                         <dynamic-dialog id="AddWebUrlInfo" button-text="URL" transition="UpdateContactInfo"
-                                parameter-map="[partyId:partyId, createWeb:'true']"/>
-                        <container-dialog id="OtherCreateDialog" button-text="Other">
+                                parameter-map="[partyId:partyId, createWeb:'true']" button-flat="true"/>
+                        <container-dialog id="OtherCreateDialog" button-text="Other" button-flat="true">
                             <form-single name="OtherCreateForm" transition="createContactMechOther">
                                 <field name="partyId"><default-field><hidden/></default-field></field>
                                 <field name="contactMechTypeEnumId"><default-field title="Type">
@@ -915,8 +919,8 @@ along with this software (see the LICENSE.md file). If not, see
                         <container-row><row-col lg="6">
                             <dynamic-dialog id="UpdatePhoneInfo" button-text="Update" transition="UpdateContactInfo"
                                     parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
-                                        telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
-                            <container-dialog id="PhonePurposeDialog" button-text="Purpose">
+                                        telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]" button-flat="true"/>
+                            <container-dialog id="PhonePurposeDialog" button-text="Purpose" button-flat="true">
                                 <form-single name="PhonePurposeForm" transition="storePartyContactMech">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="contactMechId" from="contactInfo.telecomContactMechId">
@@ -941,7 +945,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </container-dialog>
                             <link url="removeContactInfo" text=" " icon="fa fa-trash" confirmation="Remove phone number?"
                                     parameter-map="[partyId:partyId, contactMechId:contactInfo.telecomContactMechId,
-                                        contactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
+                                        contactMechPurposeId:contactInfo.telecomContactMechPurposeId]" button-flat="true"/>
                         </row-col><row-col lg="6">
                             <label text="${contactInfo.telecomContactMechPurpose.description}" type="strong"/>
                             <render-mode><text type="html,vuet,qvt" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
@@ -951,8 +955,8 @@ along with this software (see the LICENSE.md file). If not, see
                         <container-row><row-col lg="6">
                             <dynamic-dialog id="UpdateEmailInfo" button-text="Update" transition="UpdateContactInfo"
                                     parameter-map="[partyId:partyId, emailContactMechId:contactInfo.emailContactMechId,
-                                        emailContactMechPurposeId:contactInfo.emailContactMechPurposeId]"/>
-                            <container-dialog id="EmailPurposeDialog" button-text="Purpose">
+                                        emailContactMechPurposeId:contactInfo.emailContactMechPurposeId]" button-flat="true"/>
+                            <container-dialog id="EmailPurposeDialog" button-text="Purpose" button-flat="true">
                                 <form-single name="EmailPurposeForm" transition="storePartyContactMech">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="contactMechId" from="contactInfo.emailContactMechId">
@@ -975,7 +979,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </container-dialog>
                             <link url="removeContactInfo" text=" " icon="fa fa-trash" confirmation="Remove email address?"
                                     parameter-map="[partyId:partyId, contactMechId:contactInfo.emailContactMechId,
-                                        contactMechPurposeId:contactInfo.emailContactMechPurposeId]"/>
+                                        contactMechPurposeId:contactInfo.emailContactMechPurposeId]" button-flat="true"/>
                         </row-col><row-col lg="6">
                             <label text="${contactInfo.emailContactMechPurpose.description}" type="strong"/>
                             <render-mode><text type="html,vuet,qvt" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
@@ -985,8 +989,8 @@ along with this software (see the LICENSE.md file). If not, see
                         <container-row><row-col lg="6">
                             <dynamic-dialog id="UpdateWebInfo" button-text="Update" transition="UpdateContactInfo"
                                     parameter-map="[partyId:partyId, webContactMechId:contactInfo.webContactMechId,
-                                        webContactMechPurposeId:contactInfo.webContactMechPurposeId]"/>
-                            <container-dialog id="WebPurposeDialog" button-text="Purpose">
+                                        webContactMechPurposeId:contactInfo.webContactMechPurposeId]" button-flat="true"/>
+                            <container-dialog id="WebPurposeDialog" button-text="Purpose" button-flat="true">
                                 <form-single name="WebPurposeForm" transition="storePartyContactMech">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="contactMechId" from="contactInfo.webContactMechId">
@@ -1009,7 +1013,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </container-dialog>
                             <link url="removeContactInfo" text=" " icon="fa fa-trash" confirmation="Remove Web URL?"
                                     parameter-map="[partyId:partyId, contactMechId:contactInfo.webContactMechId,
-                                        contactMechPurposeId:contactInfo.webContactMechPurposeId]"/>
+                                        contactMechPurposeId:contactInfo.webContactMechPurposeId]" button-flat="true"/>
                         </row-col><row-col lg="6">
                             <label text="${contactInfo.webContactMechPurpose.description}" type="strong"/>
                             <render-mode><text type="html,vuet,qvt" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
@@ -1022,7 +1026,7 @@ along with this software (see the LICENSE.md file). If not, see
                             <field-map field-name="contactMechPurposeId" from="otherPcmi.contactMechPurposeId"/></entity-find-one>
                     </actions><widgets>
                         <container-row><row-col lg="6">
-                            <container-dialog id="OtherUpdateDialog" button-text="Update">
+                            <container-dialog id="OtherUpdateDialog" button-text="Update" button-flat="true">
                                 <form-single name="OtherUpdateForm" transition="updatePartyContactOther">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="contactMechId" from="otherPcmi.contactMechId">
@@ -1031,10 +1035,10 @@ along with this software (see the LICENSE.md file). If not, see
                                         <default-field><hidden/></default-field></field>
                                     <field name="infoString" from="otherPcmi.infoString"><default-field title="Value">
                                         <text-line size="60"/></default-field></field>
-                                    <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                                    <field name="submitButton"><default-field title="Update"><submit button-flat="true"/></default-field></field>
                                 </form-single>
                             </container-dialog>
-                            <container-dialog id="OtherPurposeDialog" button-text="Purpose">
+                            <container-dialog id="OtherPurposeDialog" button-text="Purpose" button-flat="true">
                                 <form-single name="OtherPurposeForm" transition="storePartyContactMech">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="contactMechId" from="otherPcmi.contactMechId">
@@ -1059,7 +1063,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </container-dialog>
                             <link url="removeContactInfo" text=" " icon="fa fa-trash" confirmation="Remove Contact Info?"
                                     parameter-map="[partyId:partyId, contactMechId:otherPcmi.contactMechId,
-                                        contactMechPurposeId:otherPcmi.contactMechPurposeId]"/>
+                                        contactMechPurposeId:otherPcmi.contactMechPurposeId]" button-flat="true"/>
                         </row-col><row-col lg="6">
                             <label text="${contactMechTypeEnum.description} - ${contactMechPurpose.description}" type="strong"/>
                             <container><label text="${otherPcmi.infoString}" type="i"/></container>
@@ -1069,16 +1073,16 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <container-box type="info"><box-header title="Postal Addresses"/><box-toolbar>
                     <dynamic-dialog id="ExpiredPostalDialog" button-text="Old Addresses" transition="ExpiredPostal"
-                            width="840" parameter-map="[partyId:partyId]"/>
+                            width="840" parameter-map="[partyId:partyId]" button-flat="true"/>
                     <dynamic-dialog id="AddAddressInfo" button-text="Add Address" transition="UpdateContactInfo"
-                            width="840" parameter-map="[partyId:partyId, createPostal:'true']"/>
+                            width="840" parameter-map="[partyId:partyId, createPostal:'true']" button-flat="true"/>
                 </box-toolbar><box-body>
                     <section-iterate name="PostalInfoSection" list="contactOut.postalAddressList" entry="contactInfo"><widgets>
                         <container-row><row-col lg="6">
                             <dynamic-dialog id="UpdatePostalInfo" button-text="Update" transition="UpdateContactInfo" width="840"
                                     parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
-                                        postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
-                            <container-dialog id="PostalPurposeDialog" button-text="Purpose">
+                                        postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]" button-flat="true"/>
+                            <container-dialog id="PostalPurposeDialog" button-text="Purpose" button-flat="true">
                                 <form-single name="PostalPurposeForm" transition="storePartyContactMech">
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="contactMechId" from="contactInfo.postalContactMechId">
@@ -1101,20 +1105,20 @@ along with this software (see the LICENSE.md file). If not, see
                             </container-dialog>
                             <link url="removeContactInfo" text=" " icon="fa fa-trash" confirmation="Remove Address?"
                                     parameter-map="[partyId:partyId, contactMechId:contactInfo.postalContactMechId,
-                                        contactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                                        contactMechPurposeId:contactInfo.postalContactMechPurposeId]" button-flat="true"/>
                             <container>
                                 <label text="Trust: ${contactInfo.postalTrustLevelEnum?.description ?: 'New'}" type="strong"/>
                                 <link url="validateAddress" text="Validate" parameter-map="[partyId:partyId, contactMechId:contactInfo.postalContactMechId]"
-                                        condition="!contactInfo.postalContactMech.trustLevelEnumId || contactInfo.postalContactMech.trustLevelEnumId == 'CmtlNew'"/>
+                                        condition="!contactInfo.postalContactMech.trustLevelEnumId || contactInfo.postalContactMech.trustLevelEnumId == 'CmtlNew'" button-flat="true"/>
                                 <link url="updateContactMechMutable" text="Grey" parameter-map="[contactMechId:contactInfo.postalContactMechId, trustLevelEnumId:'CmtlGreylisted']"
                                         condition="!(contactInfo.postalContactMech.trustLevelEnumId in ['CmtlGreylisted', 'CmtlBlacklisted'])"
-                                        confirmation="Really greylist this address?" btn-type="warning"/>
+                                        confirmation="Really greylist this address?" btn-type="warning" button-flat="true"/>
                                 <link url="updateContactMechMutable" text="Black" parameter-map="[contactMechId:contactInfo.postalContactMechId, trustLevelEnumId:'CmtlBlacklisted']"
                                         condition="contactInfo.postalContactMech.trustLevelEnumId != 'CmtlBlacklisted'"
-                                        confirmation="Really blacklist this address?" btn-type="danger"/>
+                                        confirmation="Really blacklist this address?" btn-type="danger" button-flat="true"/>
                                 <link url="updateContactMechMutable" text="Unlist" parameter-map="[contactMechId:contactInfo.postalContactMechId, trustLevelEnumId:'CmtlNew']"
                                         condition="contactInfo.postalContactMech.trustLevelEnumId in ['CmtlGreylisted', 'CmtlBlacklisted']"
-                                        confirmation="Set trust level back to New?" btn-type="danger"/>
+                                        confirmation="Set trust level back to New?" btn-type="danger" button-flat="true"/>
                             </container>
                             <label text="${contactInfo.postalContactMech.validateMessage?:''}" type="div"/>
                         </row-col><row-col lg="6">
@@ -1133,10 +1137,10 @@ along with this software (see the LICENSE.md file). If not, see
                 <container-box type="success"><box-header title="Payment Methods"/><box-toolbar>
                     <dynamic-dialog id="CreateCreditCardDialog" button-text="Create Credit Card"
                             transition="UpdatePaymentMethodInfo" width="800"
-                            parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtCreditCard']"/>
+                            parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtCreditCard']" button-flat="true"/>
                     <dynamic-dialog id="CreateBankAccountDialog" button-text="Create Bank Account"
                             transition="UpdatePaymentMethodInfo" width="800"
-                            parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtBankAccount']"/>
+                            parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtBankAccount']" button-flat="true"/>
                 </box-toolbar><box-body>
                     <container style="float-box" type="ul">
                         <section-iterate name="BillingInfoSection" list="ppmiOut.methodInfoList" entry="methodInfo"><widgets>
@@ -1146,11 +1150,11 @@ along with this software (see the LICENSE.md file). If not, see
                                 <label text="Gateway: ${methodInfo.paymentMethod.gatewayConfig?.description}" type="div" condition="methodInfo.paymentMethod?.paymentGatewayConfigId"/>
                                 <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
                                         transition="UpdatePaymentMethodInfo" width="800"
-                                        parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                        parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]" button-flat="true"/>
                                 <link url="removePaymentMethod" text=" " icon="fa fa-trash"
                                         parameter-map="[paymentMethodId:methodInfo.paymentMethodId]"
-                                        confirmation="Really delete Payment Method ${methodInfo.paymentMethodId}?"/>
-                                <link url="editPaymentMethod" text="Detail" parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                        confirmation="Really delete Payment Method ${methodInfo.paymentMethodId}?" button-flat="true"/>
+                                <link url="editPaymentMethod" text="Detail" parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]" button-flat="true"/>
                             </container>
                         </widgets></section-iterate>
                     </container>
@@ -1161,18 +1165,18 @@ along with this software (see the LICENSE.md file). If not, see
                     <econdition field-name="ownerPartyId" from="partyId"/></entity-find>
             </actions><widgets>
                 <container-box type="success"><box-header title="Financial Accounts"/><box-toolbar>
-                    <link url="findFinancialAccount" text="Find Accounts" parameter-map="[ownerPartyId:partyId]"/>
+                    <link url="findFinancialAccount" text="Find Accounts" parameter-map="[ownerPartyId:partyId]" button-flat="true"/>
                     <link url="findFinancialAccount" text="Create Account"
-                            parameter-map="[ownerPartyId:partyId, _openDialog:'NewFinancialAccountDialog']"/>
+                            parameter-map="[ownerPartyId:partyId, _openDialog:'NewFinancialAccountDialog']" button-flat="true"/>
                 </box-toolbar><box-body>
                     <form-list name="FinancialAccountList" list="financialAccountList" skip-form="true">
                         <field name="finAccountName"><default-field title="Account">
-                            <link url="editFinancialAccount" text="FinancialAccountNameTemplate" link-type="anchor"/></default-field></field>
+                            <link url="editFinancialAccount" text="FinancialAccountNameTemplate" link-type="anchor" button-flat="true"/></default-field></field>
                         <field name="finAccountTypeId"><default-field title="Type">
                             <display-entity entity-name="mantle.account.financial.FinancialAccountType"/></default-field></field>
                         <field name="organizationPartyId"><default-field title="Organization">
                             <link url="." entity-name="mantle.party.PartyDetail" text="PartyNameTemplate" link-type="anchor"
-                                    parameter-map="[partyId:organizationPartyId]"/>
+                                    parameter-map="[partyId:organizationPartyId]" button-flat="true"/>
                         </default-field></field>
                         <field name="statusId"><default-field title="Status">
                             <display-entity entity-name="moqui.basic.StatusItem" also-hidden="false"/></default-field></field>
@@ -1190,7 +1194,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <econdition field-name="partyId"/><order-by field-name="-contentDate"/></entity-find>
             </actions><widgets>
                 <container-box><box-header title="Content"/><box-toolbar>
-                    <container-dialog id="NewContentDialog" button-text="Add Content">
+                    <container-dialog id="NewContentDialog" button-text="Add Content" button-flat="true">
                         <form-single name="NewContentForm" transition="createContent">
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="partyContentTypeEnumId"><default-field title="Content Type">
@@ -1213,8 +1217,8 @@ along with this software (see the LICENSE.md file). If not, see
                             <container><label text="${contentTypeEnum?.description?:'No Type'}" type="strong"/></container>
                             <link url="downloadContent" condition="content.contentLocation"
                                   parameter-map="[partyContentId:content.partyContentId]"
-                                  text="Download ${content.contentLocation.substring(content.contentLocation.lastIndexOf('/')+1)}"/>
-                            <container-dialog id="UpdateContentContainer" button-text="Edit Content">
+                                  text="Download ${content.contentLocation.substring(content.contentLocation.lastIndexOf('/')+1)}" button-flat="true"/>
+                            <container-dialog id="UpdateContentContainer" button-text="Edit Content" button-flat="true">
                                 <form-single name="UpdateContentForm" transition="updateContent" map="content">
                                     <field name="partyContentId"><default-field><hidden/></default-field></field>
                                     <field name="partyId"><default-field><hidden/></default-field></field>
