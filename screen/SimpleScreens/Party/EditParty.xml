@@ -181,6 +181,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <container-row><row-col lg="6">
+            <container style="q-mb-sm">
             <link url="findRequest" text="Requests" badge="${requestCount}" parameter-map="[partyId:partyId]" condition="requestCount"/>
             <link url="findOrder" text="Sales Orders" badge="${customerOrderPartCount}" parameter-map="[customerPartyId:partyId]" condition="customerOrderPartCount"/>
             <link url="findOrder" text="Purchase Orders" badge="${vendorOrderPartCount}" parameter-map="[vendorPartyId:partyId]" condition="vendorOrderPartCount"/>
@@ -226,7 +227,7 @@ along with this software (see the LICENSE.md file). If not, see
             </widgets></section>
 
             <section name="ConvertPartySection" condition="party?.partyTypeEnumId == 'PtyOrganization'"><widgets>
-                <container-dialog id="ConvertToPersonSection" button-text="Convert To Person" button-flat="true">
+                <container-dialog id="ConvertToPersonSection" button-text="Convert To Person">
                     <form-single name="ConvertToPersonForm" map="party" transition="convertPartyToPerson">
                         <field name="partyId"><default-field><hidden/></default-field></field>
                         <field name="firstName" from="party.organizationName.contains(' ') ? party.organizationName.substring(0, party.organizationName.lastIndexOf(' ')) : party.organizationName">
@@ -239,7 +240,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </container-dialog>
             </widgets><fail-widgets>
-                <container-dialog id="ConvertToOrganizationSection" button-text="Convert To Organization" button-flat="true">
+                <container-dialog id="ConvertToOrganizationSection" button-text="Convert To Organization">
                     <form-single name="ConvertToOrganizationForm" map="party" transition="convertPartyToOrganization">
                         <field name="partyId"><default-field><hidden/></default-field></field>
                         <field name="organizationName"><default-field>
@@ -249,7 +250,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container-dialog>
             </fail-widgets></section>
 
-            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960" type="warning" button-flat="true"/>
+            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960" type="warning"/>
 
             <section name="HasDuplicatesSection"><actions>
                 <if condition="party.hasDuplicates != 'Y'"><service-call name="mantle.party.DuplicateServices.find#PartyHasDuplicates"
@@ -269,9 +270,9 @@ along with this software (see the LICENSE.md file). If not, see
                     </widgets></section-iterate>
                 </container>
             </widgets></section>
-
+            </container>
             <section name="EditPartySection" condition="party?.partyTypeEnumId == 'PtyOrganization'"><widgets>
-                <form-single name="EditOrganizationForm" map="party" transition="updateParty" container-style="q-mb-sm rounded-borders">
+                <form-single name="EditOrganizationForm" map="party" transition="updateParty" container-style="q-ma-sm rounded-borders">
                     <field name="partyId"><default-field><hidden/></default-field></field>
                     <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
                     <field name="organizationName"><default-field><text-line size="60"/></default-field></field>
