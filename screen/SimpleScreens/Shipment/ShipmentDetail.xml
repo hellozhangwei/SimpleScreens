@@ -329,17 +329,17 @@ along with this software (see the LICENSE.md file). If not, see
 
             <container-dialog id="CancelDialog" button-text="Cancel Shipment" condition="!(shipment.statusId in ['ShipDelivered', 'ShipRejected', 'ShipCancelled'])">
                 <label text="Invoices associated with this shipment will be CANCELLED: ${invoiceIdSet.join(', ')}"
-                        condition="isOutgoing &amp;&amp; invoiceIdSet" type="p" style="text-danger"/>
+                        condition="isOutgoing &amp;&amp; invoiceIdSet" type="div" style="q-pa-md text-white bg-negative"/>
                 <label text="Invoices (found ${invoiceIdSet.size()} associated with this shipment) will not be changed, must be cancelled manually"
-                        condition="!isOutgoing &amp;&amp; invoiceIdSet" type="p" style="text-warning"/>
-                <label text="Items have been packed/issued, these will be un-packed and returned to inventory" condition="anyItemPacked" type="p" style="text-danger"/>
-                <label text="Items have been received, all receipt quantities will be set to zero" condition="anyReceived" type="p" style="text-danger"/>
-                <label text="Labels will not be refunded automatically, refund manually if needed" condition="hasAnyLabels" type="p" style="text-warning"/>
-                <label text="Payments associated with this shipment through order or invoice will not be changed" type="p" style="text-warning"/>
-                <label text="Emails have been sent, these cannot be unsent" type="p" style="text-danger" condition="emailMessageCount"/>
+                        condition="!isOutgoing &amp;&amp; invoiceIdSet" type="div" style="q-pa-md text-white bg-warning"/>
+                <label text="Items have been packed/issued, these will be un-packed and returned to inventory" condition="anyItemPacked" type="div" style="q-pa-md text-white bg-negative"/>
+                <label text="Items have been received, all receipt quantities will be set to zero" condition="anyReceived" type="div" style="q-pa-md text-white bg-negative"/>
+                <label text="Labels will not be refunded automatically, refund manually if needed" condition="hasAnyLabels" type="div" style="q-pa-md text-white bg-warning"/>
+                <label text="Payments associated with this shipment through order or invoice will not be changed" type="div" style="q-pa-md text-white bg-warning"/>
+                <label text="Emails have been sent, these cannot be unsent" condition="emailMessageCount" type="div" style="q-pa-md text-white bg-negative"/>
 
-                <label text="Are you sure you want to cancel this shipment?"/>
-                <link url="cancelShipment" text="Cancel Shipment"/>
+                <label text="Are you sure you want to cancel this shipment?" type="div" style="q-pa-md"/>
+                <link url="cancelShipment" text="Cancel Shipment" style="q-ma-md"/>
             </container-dialog>
 
             <container-dialog id="AuditLogDialog" button-text="Audit Log" width="960">

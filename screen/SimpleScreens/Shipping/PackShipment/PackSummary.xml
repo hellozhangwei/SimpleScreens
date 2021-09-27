@@ -236,9 +236,9 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <section name="ShipShipmentSection" condition="shipment.statusId == 'ShipPacked'"><widgets>
                     <container-dialog id="SetShippedDialog" button-text="Set Shipped" type="${!hasAllTrackingCodes ? 'danger' : (!hasAllLabels ? 'warning' : 'success')}">
-                        <label text="Set as Shipped? If a Shipment Shipped email is configured it will be sent to the Customer." condition="isOutgoing" style="text-success" type="p"/>
-                        <container><label text="Not all packages have Labels" type="strong" style="text-warning" condition="!hasAllLabels"/></container>
-                        <container><label text="Not all packages have Tracking Codes" type="strong" style="text-danger" condition="!hasAllTrackingCodes"/></container>
+                        <label text="Set as Shipped? If a Shipment Shipped email is configured it will be sent to the Customer." condition="isOutgoing" style="q-pa-md bg-positive" type="div"/>
+                        <container><label text="Not all packages have Labels" type="div" style="q-pa-md bg-warning" condition="!hasAllLabels"/></container>
+                        <container><label text="Not all packages have Tracking Codes" type="div" style="q-pa-md bg-negative" condition="!hasAllTrackingCodes"/></container>
                         <form-single name="SetShippedForm" transition="shipShipment" focus-field="submitButton">
                             <field name="shipmentId"><default-field><display/></default-field></field>
                             <field name="actualStartDate" from="ec.user.nowTimestamp">

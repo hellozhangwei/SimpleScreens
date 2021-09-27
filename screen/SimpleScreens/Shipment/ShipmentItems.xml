@@ -132,11 +132,11 @@ along with this software (see the LICENSE.md file). If not, see
             <section name="DeliverShipmentSection" condition="(anyReceived &amp;&amp; shipment.statusId in ['ShipScheduled', 'ShipPacked', 'ShipShipped']) ||
                     (isOutgoing &amp;&amp; shipment.statusId in ['ShipPacked', 'ShipShipped'])"><widgets>
                 <container-dialog id="SetDeliveredDialog" button-text="Set Delivered">
-                    <label text="Set as Delivered and generate invoice for order items if needed?" condition="isIncoming" type="p"/>
-                    <label text="Set as Delivered?" condition="isOutgoing" type="p"/>
-                    <label text="Set to Delivered? No additional items may be received once Delivered." condition="isTransfer"/>
+                    <label text="Set as Delivered and generate invoice for order items if needed?" condition="isIncoming" type="div" style="q-pa-sm bg-blue-2"/>
+                    <label text="Set as Delivered?" condition="isOutgoing" type="div" style="q-pa-sm bg-blue-2"/>
+                    <label text="Set to Delivered? No additional items may be received once Delivered." condition="isTransfer" type="div" style="q-pa-sm bg-blue-2"/>
                     <label text="Not all items are received, item quantities will be reduced to received quantities."
-                            type="p" style="text-warning" condition="isIncoming &amp;&amp; !allReceived"/>
+                           type="div" style="q-pa-sm bg-warning" condition="isIncoming &amp;&amp; !allReceived"/>
                     <form-single name="SetDeliveredForm" transition="deliverShipment" focus-field="submitButton">
                         <field name="shipmentId"><default-field><display/></default-field></field>
                         <field name="actualArrivalDate" from="ec.user.nowTimestamp">
