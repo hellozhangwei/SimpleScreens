@@ -102,7 +102,8 @@ along with this software (see the LICENSE.md file). If not, see
                         <label text="${ec.resource.expand('ProductNameTemplate', '', sid)} - ${ec.l10n.format(sid.quantityTotal ?: 0.0, '0.##')} of ${ec.l10n.format(sid.quantity, '0.##')} packed"
                                 type="p" style="text-danger" condition="quantityPackRemaining"/>
                     </widgets></section-iterate>
-                    <label text="An Invoice will be generated for this Shipment when it is Packed and the Invoice Date will be set to the Packed Date." type="p"/>
+
+                    <label text="An Invoice will be generated for this Shipment when it is Packed and the Invoice Date will be set to the Packed Date." type="div" style="q-pa-sm bg-warning"/>
 
                     <section name="AssemblyPackWarnings" condition="assemblyAssetInfo?.componentIssuedAvailable"><actions>
                         <!-- turn the Map into a List of Map for a form-list -->
@@ -161,7 +162,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </container-dialog>
             </widgets></section>
-        </box-toolbar><box-body>
+        </box-toolbar><box-body-nopad>
             <form-single name="ItemsOptionsForm" transition="." pass-through-parameters="true">
                 <field name="filterProductId"><default-field title="Product"><drop-down allow-empty="true">
                     <list-options list="allProductList" key="${productId}" text="ProductNameTemplate"/>
@@ -580,6 +581,6 @@ along with this software (see the LICENSE.md file). If not, see
                     </widgets></section>
                 </box-body-nopad></container-box>
             </widgets></section-iterate>
-        </box-body></container-box>
+        </box-body-nopad></container-box>
     </widgets>
 </screen>
