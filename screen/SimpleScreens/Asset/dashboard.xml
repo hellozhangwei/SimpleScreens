@@ -18,13 +18,13 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="assetOnHand"><default-response url="//${appRoot}/Accounting/Reports/AssetOnHand"/></transition>
 
     <widgets>
-        <container>
+        <container style="q-my-sm q-gutter-sm">
             <link url="../Asset/FindSummary" text="Asset Summary"/>
-            <link url="../Asset/FindAsset" text="Assets"/>
+            <link url="../Asset/FindAsset" text="Individual Assets"/>
             <link url="../Asset/SelectAsset" text="Move Asset"/>
             <link url="../PhysicalInventory" text="Physical Inventory"/>
         </container>
-        <container>
+        <container style="q-my-sm q-gutter-sm">
             <link url="../Container" text="Containers"/>
             <link url="../EditLots" text="Lots"/>
             <link url="../AssetPool" text="Pools"/>
