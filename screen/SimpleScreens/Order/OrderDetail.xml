@@ -194,6 +194,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </row-col><row-col sm="6">
                     <label text="Web Order (ecommerce)" condition="orderHeader?.salesChannelEnumId == 'ScWeb'" type="h4" style="text-success"/>
                 </row-col></container-row>
+                <container style="q-mb-sm">
                 <label text="Recurring Order: ${recurCronDescription}" condition="recurCronDescription" type="h4" style="text-success"/>
 
                 <section name="PlaceSection" condition="orderHeader.statusId in ['OrderOpen', 'OrderProposed', 'OrderBeingChanged', 'OrderHold']"><widgets>
@@ -332,7 +333,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <section-iterate name="InvoiceLinks" list="invoiceIdSet" entry="invoiceId"><widgets>
                     <link url="editInvoice" text="Invoice ${invoiceId}" link-type="anchor-button"/>
                 </widgets></section-iterate>
-
+                </container>
                 <form-single name="HeaderForm" transition="updateOrderHeader" map="orderHeader">
                     <field name="orderId"><default-field><hidden/></default-field></field>
 
@@ -674,9 +675,10 @@ along with this software (see the LICENSE.md file). If not, see
                 }
             ]]></script>
             <set field="shippingAddressInfo" from="orderPart.postalContactMechId ? shippingPostalAddressList.find({ orderPart.postalContactMechId.equals(it.postalContactMechId) }) : null"/>
-        </actions><widgets>
-            <container type="hr"/>
-            <container-row style="shaded-area">
+        </actions>
+            <widgets>
+            <container style="bg-blue-2 q-pa-md q-ma-sm q-card--bordered rounded-borders">
+            <container-row >
                 <row-col lg="5">
                     <container><label text="${orderPartInfo.isVendorInternalOrg ? 'Sales' : 'Purchase'} Order Part ${orderPart.orderPartSeqId}" type="h4"/></container>
 
@@ -942,7 +944,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <label text="Payment Terms" type="dt" condition="orderPartInfo.partSettlementTerm?.description"/>
                         <label text="${orderPartInfo.partSettlementTerm.description}" type="dd" condition="orderPartInfo.partSettlementTerm?.description"/>
 
-                        <label text="Facility " type="dt"/>
+                        <label text="Facility" type="dt"/>
                         <container type="dd">
                             <link url="editFacility" text="FacilityNameTemplate" text-map="orderPartInfo.facility"
                                     parameter-map="[facilityId:orderPartInfo.facility.facilityId]" link-type="anchor"
@@ -1145,6 +1147,7 @@ along with this software (see the LICENSE.md file). If not, see
             </container-row>
 
             <section name="AddItemsSection" condition="orderPartInfo.partEditable"><widgets>
+                <container style="q-mb-sm">
                 <container-dialog id="AddProductItemContainer" button-text="Add Product Item">
                     <form-single name="AddProductItemForm" transition="addProductItem" focus-field="productId">
                         <field name="orderId"><default-field><hidden/></default-field></field>
@@ -1245,7 +1248,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <link url="updateOrderPart" text="Promos" btn-type="success" icon="fa fa-check"
                         condition="orderPart.disablePromotions != 'Y'"
                         parameter-map="[orderId:orderId, orderPartSeqId:orderPart.orderPartSeqId, disablePromotions:'Y']"/>
-            </widgets></section>
+                </container></widgets></section>
 
             <label text="Showing ${orderPartInfo.partNoParentOrderItemList.size()} of ${orderPartInfo.partNoParentOrderItemCount} Items"
                     type="strong" style="text-danger"
@@ -1547,7 +1550,9 @@ along with this software (see the LICENSE.md file). If not, see
                 <form-list-column><field-ref name="returns"/><field-ref name="returnItem"/></form-list-column>
                 <form-list-column><field-ref name="submitButton"/><field-ref name="closeButton"/></form-list-column>
             </form-list>
-        </widgets></section-iterate>
+            </container>
+        </widgets>
+        </section-iterate>
         <text type="html,vuet"><![CDATA[<script>$(function () { $('[data-toggle="popover"]').popover({ sanitize:false, html:true, trigger:"hover click" }); })</script>]]></text>
     </widgets>
 </screen>
