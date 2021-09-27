@@ -366,7 +366,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </form-list>
             </container-dialog>
 
-            <container>
+            <container style="q-my-sm">
                 <section name="OutgoingTransferSection" condition="isOutgoing || isTransfer"><widgets>
                     <link url="ShipmentPick.pdf" text="Pick" icon="fa fa-download" style="${shipment.statusId in ['ShipScheduled', 'ShipPicked'] ? 'btn-info' : ''}"/>
                     <render-mode><text type="vuet,qvt"><![CDATA[<button v-if="$root.qzVue" class="btn btn-default btn-sm" onclick="moqui.printUrlMain('/fop/apps/${appRoot}/Shipment/ShipmentPick?shipmentId=${shipmentId}')"><i class="fa fa-print"></i> Pick</button>]]></text></render-mode>
@@ -466,7 +466,7 @@ along with this software (see the LICENSE.md file). If not, see
             </container>
 
             <!-- Main/Header Form -->
-            <form-single name="EditShipment" transition="updateShipment" map="shipment">
+            <form-single name="EditShipment" transition="updateShipment" map="shipment" container-style="rounded-borders">
                 <field name="shipmentId"><default-field><hidden/></default-field></field>
 
                 <field name="originPostalContactMechId" from="firstRouteSegment.originPostalContactMechId">
@@ -671,7 +671,7 @@ along with this software (see the LICENSE.md file). If not, see
             ]]></text></render-mode></widgets></section>
 
             <section name="PackScanSection" condition="isOutgoing &amp;&amp; shipment.statusId in ['ShipInput', 'ShipScheduled', 'ShipPicked']"><widgets>
-                <form-single name="PackScanForm" transition="packShipmentProductScan" focus-field="scanInput">
+                <form-single name="PackScanForm" transition="packShipmentProductScan" focus-field="scanInput" container-style="q-ma-sm rounded-borders">
                     <field name="shipmentId"><default-field><hidden/></default-field></field>
                     <field name="quantity" from="1"><default-field><text-line size="4"/></default-field></field>
                     <field name="scanInput"><default-field title="Product"><text-line size="20"/></default-field></field>
@@ -688,7 +688,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <entity-find-one entity-name="mantle.product.asset.Container" value-field="pickContainer">
                     <field-map field-name="containerId" from="shipment.pickContainerId"/></entity-find-one>
             </actions><widgets>
-                <form-single name="PickScanForm" transition="pickMoveShipmentProduct">
+                <form-single name="PickScanForm" transition="pickMoveShipmentProduct" container-style="q-ma-sm rounded-borders">
                     <field name="shipmentId"><default-field><hidden/></default-field></field>
                     <field name="quantity" from="1"><default-field><text-line size="4"/></default-field></field>
                     <field name="scanProduct"><default-field title="Product"><text-line size="20"/></default-field></field>
