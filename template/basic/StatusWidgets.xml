@@ -32,23 +32,18 @@ along with this software (see the LICENSE.md file). If not, see
                 <order-by field-name="transitionSequence,transitionName"/>
             </entity-find>
         </actions><widgets>
-            <container style="shaded-area condensed" type="span">
-                <container style="float-plain condensed" type="ul">
-                    <container type="li">
-                        <container><label text="Status" type="strong"/></container>
-                        <container><label text="${statusItem?.description ?: ''}" type="strong" style="text-info"/></container>
-                    </container>
+            <container-box>
+                <box-header title="Current Status:${statusItem?.description ?: ''}"></box-header>
+                <box-body>
                     <section-iterate name="StatusChangeLinkSection" list="statusTransitionList" entry="statusTransition"><condition>
                         <expression>statusTransition.userPermissionId == null || statusTransition.userPermissionId.isEmpty() || ec.user.hasPermission(statusTransition.userPermissionId)</expression>
                     </condition><widgets>
-                        <container type="li">
-                            <link url="${statusChangeTransition ?: 'updateStatus'}" text="StatusTransitionNameTemplate"
-                                    text-map="statusTransition" parameter-map="[statusId:statusTransition.toStatusId]"
-                                    confirmation="Change status to ${statusTransition.description}?"/>
-                        </container>
+                        <link url="${statusChangeTransition ?: 'updateStatus'}" text="StatusTransitionNameTemplate"
+                              text-map="statusTransition" parameter-map="[statusId:statusTransition.toStatusId]"
+                              confirmation="Change status to ${statusTransition.description}?"/>
                     </widgets></section-iterate>
-                </container>
-            </container>
+                </box-body>
+            </container-box>
         </widgets></section>
 
         <!-- this requires a statusHistoryList field in the context (with moqui.entity.EntityAuditLog values) OR a
