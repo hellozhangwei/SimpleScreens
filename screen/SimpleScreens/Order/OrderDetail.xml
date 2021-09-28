@@ -1269,6 +1269,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <service-call name="mantle.order.OrderServices.get#OrderItemTotal"
                             in-map="[orderItem:orderItem, getChildrenTotals:true]" out-map="orderItemTotalOut"/>
 
+                    <set field="applicableParentItems" from="applicableParentItems.findAll({ it.orderItemSeqId!= orderItemSeqId})"/>
                     <set field="product" from="orderItem.product"/>
                     <if condition="product != null">
                         <entity-find entity-name="mantle.product.issuance.AssetReservation" list="existingResList">
