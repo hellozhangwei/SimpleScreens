@@ -284,8 +284,8 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <link url="cloneOrder" text="Clone" confirmation="Create new order based on this one?" parameter-map="[baseOrderId:orderId]"/>
                 <container-dialog id="RecurDialog" button-text="Recurring" type="${orderHeader.recurCronExpression ? (orderHeader.statusId == 'OrderApproved' ? 'success' : 'warning') : 'primary'}">
-                    <label text="Order is not in Approved status" type="p" style="text-warning" condition="orderHeader.statusId != 'OrderApproved'"/>
-                    <label text="Recurring orders in the Approved status will be automatically cloned according to the schedule and the clone will be automatically Placed. If there are no Approve Warnings the cloned order will be automatically Approved. If Auto Invoice is set to Y then if Approved will also create an Invoice for the Order." type="p"/>
+                    <label text="Order is not in Approved status" type="div" style="bg-warning q-pa-sm" condition="orderHeader.statusId != 'OrderApproved'"/>
+                    <label text="Recurring orders in the Approved status will be automatically cloned according to the schedule and the clone will be automatically Placed. If there are no Approve Warnings the cloned order will be automatically Approved. If Auto Invoice is set to Y then if Approved will also create an Invoice for the Order." type="div" style="bg-blue-2 q-pa-sm"/>
                     <form-single name="RecurOptions" map="orderHeader" transition="updateOrderRecur">
                         <field name="orderId"><default-field><hidden/></default-field></field>
                         <field name="recurCronExpression"><default-field title="Recur Schedule"><drop-down allow-empty="true">
