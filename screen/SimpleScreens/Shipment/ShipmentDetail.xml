@@ -925,7 +925,7 @@ along with this software (see the LICENSE.md file). If not, see
                 to returns, knowing that order items were returned, etc -->
             <section name="ShipItemInputSection" condition="shipment.statusId in ['ShipInput', 'ShipScheduled'] &amp;&amp; !(shipment.shipmentTypeEnumId in ['ShpTpSalesReturn', 'ShpTpPurchaseReturn'])"><widgets>
                 <container-dialog id="AddItemContainer" button-text="Add Item">
-                    <label text="WARNING: items added this way will not be associated with an order and will not count toward order item shipped quantity." type="strong" style="text-warning"/>
+                    <label text="WARNING: items added this way will not be associated with an order and will not count toward order item shipped quantity." type="div" style="q-pa-md bg-warning"/>
                     <form-single name="AddItemForm" transition="addItem">
                         <field name="shipmentId"><default-field><hidden/></default-field></field>
                         <field name="productId"><default-field title="Product">

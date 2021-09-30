@@ -162,7 +162,7 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="expectedEndOfLife"><default-field title="Expiration"><date-time type="date"/></default-field></field>
 
             <field name="ownerPartyId"><default-field title="Owner">
-                <label text="Default Asset Owner (${ownerPartyId}) different from Facility owner (${destinationFacility.ownerPartyId}), if not consignment inventory change now" style="text-warning"
+                <label text="Default Asset Owner (${ownerPartyId}) different from Facility owner (${destinationFacility.ownerPartyId}), if not consignment inventory change now" type="div" style="q-pa-sm bg-warning"
                         condition="ownerPartyId &amp;&amp; destinationFacility?.ownerPartyId &amp;&amp; ownerPartyId != destinationFacility.ownerPartyId"/>
                 <drop-down allow-empty="true">
                     <dynamic-options transition="searchPartyList" server-search="true" min-length="0" parameter-map="[roleTypeId:'Supplier,OrgInternal']"/>
