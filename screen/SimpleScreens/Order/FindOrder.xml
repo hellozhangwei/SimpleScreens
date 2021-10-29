@@ -151,7 +151,7 @@ along with this software (see the LICENSE.md file). If not, see
             <section name="ApproveOrdersSection" condition="partStatusId &amp;&amp; (partStatusId.contains('OrderPlaced') ||
                     partStatusId.contains('OrderProcessing') || partStatusId.contains('OrderHold'))"><widgets>
                 <container-dialog id="ApproveOrdersDialog" button-text="Approve Orders">
-                    <label text="Approves orders matching current find options. Use the Find Options dialog to adjust as needed before doing this." type="p"/>
+                    <label text="Approves orders matching current find options. Use the Find Options dialog to adjust as needed before doing this." type="p" style="q-ma-md"/>
                     <form-single name="ApproveOrdersForm" transition="changeOrderPartsStatus" pass-through-parameters="true">
                         <field name="toStatusId" from="'OrderApproved'"><default-field><hidden/></default-field></field>
                         <field name="submitButton"><default-field title="Approve Orders">
@@ -165,8 +165,8 @@ along with this software (see the LICENSE.md file). If not, see
                     partStatusId.contains('OrderProposed') || partStatusId.contains('OrderPlaced') || partStatusId.contains('OrderProcessing') ||
                     partStatusId.contains('OrderHold') || partStatusId.contains('OrderApproved') || partStatusId.contains('OrderSent'))"><widgets>
                 <container-dialog id="CloseOrdersDialog" button-text="Close Orders">
-                    <label text="Closes orders matching current find options. Use the Find Options dialog to adjust as needed before doing this." type="p"/>
-                    <label text="Closing an order will cancel all items not yet shipped. If all items cancelled then the order will be Cancelled. If any item was shipped the order will be Completed." type="p"/>
+                    <label text="Closes orders matching current find options. Use the Find Options dialog to adjust as needed before doing this." type="p" style="q-ma-md"/>
+                    <label text="Closing an order will cancel all items not yet shipped. If all items cancelled then the order will be Cancelled. If any item was shipped the order will be Completed." type="p" style="q-ma-md"/>
                     <form-single name="CloseOrdersForm" transition="changeOrderPartsStatus" pass-through-parameters="true">
                         <field name="toStatusId" from="'OrderCancelled'"><default-field><hidden/></default-field></field>
                         <field name="submitButton"><default-field title="Close Orders">
