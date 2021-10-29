@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-title="Quick Search" default-menu-index="2" menu-image="fa fa-search" menu-image-type="icon">
+        default-menu-title="Search" default-menu-index="2" menu-image="fa fa-search" menu-image-type="icon">
 
     <!-- NOTE: QuickSearch.xml ~= QuickLookup.xml + Search.xml -->
 
@@ -77,9 +77,9 @@ along with this software (see the LICENSE.md file). If not, see
 
         <container-box><box-header title="Search Results"/><box-body-nopad>
             <form-list name="SearchResults" list="documentList" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchResults"/>
-            <label text="Full search string: ${queryString?:''}" type="p"/>
+            <label text="Full search string: ${queryString?:''}" type="p" style="q-ma-sm"/>
             <link url="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax"
-                    url-type="plain" link-type="anchor" target-window="_blank" text="Search String Reference"/>
+                    url-type="plain" link-type="anchor" target-window="_blank" text="Search String Reference" style="q-ma-sm"/>
         </box-body-nopad></container-box>
     </widgets>
 </screen>
