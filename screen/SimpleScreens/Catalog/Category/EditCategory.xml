@@ -152,6 +152,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <entity-find entity-name="mantle.product.feature.ProductFeatureGroupAndCategoryAppl" list="pfgacaList">
                         <date-filter/><econdition field-name="productCategoryId"/></entity-find>
 
+                    <field name="description"><default-field><hidden/></default-field></field><!--We add hidden description here, because the it is null in editFeatureGroup link-->
                     <field name="productCategoryId"><default-field><hidden/></default-field></field>
                     <field name="productFeatureGroupId"><default-field><hidden/></default-field></field>
                     <field name="featureGroup"><default-field><link url="editFeatureGroup" link-type="anchor"
