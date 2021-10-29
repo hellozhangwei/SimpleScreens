@@ -43,7 +43,7 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- TODO: consider using cancel#Order service with parameter to reject instead of cancel, but rejected should always happen before Approved so nothing should be shipped, unless the order goes backward through statuses... -->
     <transition name="rejectOrder"><service-call name="mantle.order.OrderServices.update#OrderStatus" in-map="[orderId:orderId, orderPartSeqId:orderPartSeqId, statusId:'OrderRejected']"/>
         <default-response url="."/></transition>
-    <transition name="placeOrder"><service-call name="mantle.order.OrderServices.place#Order" in-map="context + [requireInventory:false]"/>
+    <transition name="placeOrder"><service-call name="mantle.order.OrderServices.place#Order" in-map="context + [requireInventory:null]"/><!--If true make sure inventory is available, if false don't check. If null defer to ProductStore.requireInventory setting.-->
         <default-response url="."/></transition>
     <transition name="approveOrder"><service-call name="mantle.order.OrderServices.approve#Order"/>
         <default-response url="."/></transition>
@@ -902,7 +902,7 @@ along with this software (see the LICENSE.md file). If not, see
                                     link-type="anchor" parameter-map="[partyId:orderPartInfo.vendorDetail.partyId]" condition="!orderPartInfo.isVendorInternalOrg &amp;&amp; orderPartInfo.vendorDetail"/>
                         </container>
                         <label text="Ship Method" type="dt"/>
-                        <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="dd"/>
+                        <label text="${orderPartInfo.shipmentMethodEnum?.description ?: 'None'}" type="dd"/>
                         <label text="Carrier" type="dt" condition="orderPartInfo.carrierPartyDetail"/>
                         <label text="${ec.resource.expand('PartyNameTemplate', null, orderPartInfo.carrierPartyDetail)}" type="dd" condition="orderPartInfo.carrierPartyDetail"/>
                         <label text="Priority" type="dt" style="${orderPartInfo.orderPart.priority == 1 ? 'text-strong text-danger' : (orderPartInfo.orderPart.priority == 2 || orderPartInfo.orderPart.priority == 3 ? 'text-strong text-warning' : '')}"/>
@@ -1160,8 +1160,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <field name="orderId"><default-field><hidden/></default-field></field>
                         <field name="orderPartSeqId" from="orderPartInfo.orderPart.orderPartSeqId"><default-field><hidden/></default-field></field>
                         <field name="updateExisting"><default-field><hidden default-value="false"/></default-field></field>
-                        <field name="requireInventory"><default-field><hidden default-value="false"/></default-field></field>
-
+                        <!--<field name="requireInventory"><default-field><hidden default-value="false"/></default-field></field>-->
                         <field name="assetClassEnumId"><default-field title="Asset Class">
                             <drop-down allow-empty="true" no-current-selected-key="AsClsInventoryFin">
                                 <entity-options key="${enumId}" text="${description}"><entity-find entity-name="moqui.basic.Enumeration">
@@ -1208,7 +1207,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <form-single name="AddOtherItemForm" transition="createItem" focus-field="itemTypeEnumId">
                         <field name="orderId"><default-field><hidden/></default-field></field>
                         <field name="orderPartSeqId" from="orderPartInfo.orderPart.orderPartSeqId"><default-field><hidden/></default-field></field>
-                        <field name="requireInventory"><default-field><hidden default-value="false"/></default-field></field>
+                        <!--<field name="requireInventory"><default-field><hidden default-value="false"/></default-field></field>-->
 
                         <field name="parentItemSeqId"><default-field title="Parent Item"><drop-down allow-empty="true">
                             <list-options list="applicableParentItems" key="${orderItemSeqId}" text="${orderItemSeqId} - ${itemDescription}"/>
@@ -1342,7 +1341,7 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <hidden-parameters>
                     <parameter name="orderId"/>
-                    <parameter name="requireInventory" value="false"/>
+                    <!--<parameter name="requireInventory" value="false"/>-->
                 </hidden-parameters>
 
                 <field name="orderItemSeqId"><default-field title="Item" container-style="${parentItemSeqId ? 'text-info' : ''}"><display/></default-field></field>
