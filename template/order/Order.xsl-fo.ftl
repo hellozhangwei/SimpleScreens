@@ -21,7 +21,7 @@ along with this software (see the LICENSE.md file). If not, see
 <#if showUpc?has_content><#assign showUpc = (showUpc == "true")><#else><#assign showUpc = firstPartInfo.isCustomerInternalOrg></#if>
 
 
-<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="Helvetica, sans-serif" font-size="10pt">
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="SimHei" font-size="10pt">
     <fo:layout-master-set>
         <fo:simple-page-master master-name="letter-portrait" page-width="8.5in" page-height="11in"
                                margin-top="0.5in" margin-bottom="0.5in" margin-left="0.5in" margin-right="0.5in">
@@ -33,19 +33,19 @@ along with this software (see the LICENSE.md file). If not, see
 
     <fo:page-sequence master-reference="letter-portrait" id="mainSequence">
         <fo:static-content flow-name="xsl-region-before">
-            <fo:block font-size="14pt" text-align="center" margin-bottom="0.1in"><#if firstPartInfo.isCustomerInternalOrg>Purchase<#else>Sales</#if> Order #${orderId}</fo:block>
+            <fo:block font-size="14pt" text-align="center" margin-bottom="0.1in"><#if firstPartInfo.isCustomerInternalOrg>${ec.l10n.localize("Purchase")}<#else>${ec.l10n.localize("Sales")}</#if> ${ec.l10n.localize("Order")} #${orderId}</fo:block>
             <fo:table table-layout="fixed" margin-bottom="0.1in" width="7.5in">
                 <fo:table-body><fo:table-row>
                     <fo:table-cell padding="3pt" width="3.75in">
-                        <fo:block font-weight="bold">Vendor</fo:block>
+                        <fo:block font-weight="bold">${ec.l10n.localize("Vendor")}</fo:block>
                         <fo:block><@encodeText (firstPartInfo.vendorDetail.organizationName)!""/><@encodeText (firstPartInfo.vendorDetail.firstName)!""/> <@encodeText (firstPartInfo.vendorDetail.lastName)!""/></fo:block>
-                        <fo:block font-weight="bold">Customer</fo:block>
+                        <fo:block font-weight="bold">${ec.l10n.localize("Customer")}</fo:block>
                         <fo:block><@encodeText (firstPartInfo.customerDetail.organizationName)!""/><@encodeText (firstPartInfo.customerDetail.firstName)!""/> <@encodeText (firstPartInfo.customerDetail.lastName)!""/></fo:block>
                     </fo:table-cell>
                     <fo:table-cell padding="3pt" width="2in">
-                        <fo:block font-weight="bold">Date</fo:block>
-                        <fo:block><#if orderHeader.placedDate??>${ec.l10n.format(orderHeader.placedDate, dateFormat)}<#else>Not yet placed</#if></fo:block>
-                        <fo:block font-weight="bold">Total</fo:block>
+                        <fo:block font-weight="bold">${ec.l10n.localize("Date")}</fo:block>
+                        <fo:block><#if orderHeader.placedDate??>${ec.l10n.format(orderHeader.placedDate, dateFormat)}<#else>${ec.l10n.localize("Not yet placed")}</#if></fo:block>
+                        <fo:block font-weight="bold">${ec.l10n.localize("Total")}</fo:block>
                         <fo:block>${ec.l10n.formatCurrency(orderHeader.grandTotal, orderHeader.currencyUomId)}</fo:block>
                     </fo:table-cell>
                     <fo:table-cell padding="3pt" width="1.75in">
@@ -87,43 +87,43 @@ along with this software (see the LICENSE.md file). If not, see
                 <fo:table table-layout="fixed" margin-bottom="0.1in" width="7.5in">
                     <fo:table-body><fo:table-row>
                         <fo:table-cell padding="3pt" width="2in">
-                            <fo:block font-weight="bold">Order Part #</fo:block>
+                            <fo:block font-weight="bold">${ec.l10n.localize("Order Part")} #</fo:block>
                             <fo:block>${orderPart.orderPartSeqId}</fo:block>
-                            <fo:block font-weight="bold">Part Total</fo:block>
+                            <fo:block font-weight="bold">${ec.l10n.localize("Part Total")}</fo:block>
                             <fo:block>${ec.l10n.formatCurrency(orderPart.partTotal, orderHeader.currencyUomId)}</fo:block>
                             <#if orderPart.otherPartyOrderId?has_content>
-                                <fo:block font-weight="bold"><#if orderPartInfo.isVendorInternalOrg>Customer<#else>Vendor</#if> Order #</fo:block>
+                                <fo:block font-weight="bold"><#if orderPartInfo.isVendorInternalOrg>${ec.l10n.localize("Customer")}<#else>${ec.l10n.localize("Vendor")}</#if> ${ec.l10n.localize("Order")} #</fo:block>
                                 <fo:block>${orderPart.otherPartyOrderId}</fo:block>
                             </#if>
                         </fo:table-cell>
                         <fo:table-cell padding="3pt" width="2in">
                             <#if orderPartInfo.shipmentMethodEnum?has_content>
-                                <fo:block font-weight="bold">Ship By</fo:block>
+                                <fo:block font-weight="bold">${ec.l10n.localize("Ship By")}</fo:block>
                                 <fo:block><@encodeText orderPartInfo.shipmentMethodEnum.description/></fo:block>
                             </#if>
                             <#if orderPart.shipAfterDate??>
-                                <fo:block font-weight="bold">Ship After</fo:block>
+                                <fo:block font-weight="bold">${ec.l10n.localize("Ship After")}</fo:block>
                                 <fo:block>${ec.l10n.format(orderPart.shipAfterDate, dateFormat)}</fo:block>
                             </#if>
                             <#if orderPart.shipBeforeDate??>
-                                <fo:block font-weight="bold">Ship Before</fo:block>
+                                <fo:block font-weight="bold">${ec.l10n.localize("Ship Before")}</fo:block>
                                 <fo:block>${ec.l10n.format(orderPart.shipBeforeDate, dateFormat)}</fo:block>
                             </#if>
                             <#if orderPart.estimatedShipDate??>
-                                <fo:block font-weight="bold">Estimated Ship</fo:block>
+                                <fo:block font-weight="bold">${ec.l10n.localize("Estimated Ship")}</fo:block>
                                 <fo:block>${ec.l10n.format(orderPart.estimatedShipDate, dateFormat)}</fo:block>
                             </#if>
                             <#if orderPart.estimatedDeliveryDate??>
-                                <fo:block font-weight="bold">Estimated Delivery</fo:block>
+                                <fo:block font-weight="bold">${ec.l10n.localize("Estimated Delivery")}</fo:block>
                                 <fo:block>${ec.l10n.format(orderPart.estimatedDeliveryDate, dateFormat)}</fo:block>
                             </#if>
                             <#if orderPart.estimatedPickUpDate??>
-                                <fo:block font-weight="bold">Estimated Pick Up</fo:block>
+                                <fo:block font-weight="bold">${ec.l10n.localize("Estimated Pick Up")}</fo:block>
                                 <fo:block>${ec.l10n.format(orderPart.estimatedPickUpDate, dateFormat)}</fo:block>
                             </#if>
                         </fo:table-cell>
                         <fo:table-cell padding="3pt" font-size="10pt" width="3.5in">
-                            <fo:block font-weight="bold">Ship To</fo:block>
+                            <fo:block font-weight="bold">${ec.l10n.localize("Ship To")}</fo:block>
                             <#if contactInfo.postalAddress?has_content>
                                 <#if contactInfo.postalAddress.toName?has_content || contactInfo.postalAddress.attnName?has_content>
                                     <#if contactInfo.postalAddress.toName?has_content><fo:block font-weight="bold">To: <@encodeText contactInfo.postalAddress.toName/></fo:block></#if>
@@ -152,14 +152,14 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <fo:table table-layout="fixed" width="100%">
                     <fo:table-header font-size="9pt" border-bottom="solid black">
-                        <fo:table-cell width="0.3in" padding="${cellPadding}"><fo:block text-align="center">Item</fo:block></fo:table-cell>
-                        <#if !showUpc><fo:table-cell width="1in" padding="${cellPadding}"><fo:block>Type</fo:block></fo:table-cell></#if>
-                        <fo:table-cell width="2.8in" padding="${cellPadding}"><fo:block>Description</fo:block></fo:table-cell>
+                        <fo:table-cell width="0.3in" padding="${cellPadding}"><fo:block text-align="center">${ec.l10n.localize("Item")}</fo:block></fo:table-cell>
+                        <#if !showUpc><fo:table-cell width="1in" padding="${cellPadding}"><fo:block>${ec.l10n.localize("Type")}</fo:block></fo:table-cell></#if>
+                        <fo:table-cell width="2.8in" padding="${cellPadding}"><fo:block>${ec.l10n.localize("Description")}</fo:block></fo:table-cell>
                         <#if showUpc><fo:table-cell width="1in" padding="${cellPadding}"><fo:block>UPC</fo:block></fo:table-cell></#if>
-                        <fo:table-cell width="0.8in" padding="${cellPadding}"><fo:block>Required By</fo:block></fo:table-cell>
-                        <fo:table-cell width="0.6in" padding="${cellPadding}"><fo:block text-align="center">Qty</fo:block></fo:table-cell>
-                        <fo:table-cell width="0.9in" padding="${cellPadding}"><fo:block text-align="right">Amount</fo:block></fo:table-cell>
-                        <fo:table-cell width="1in" padding="${cellPadding}"><fo:block text-align="right">Total</fo:block></fo:table-cell>
+                        <fo:table-cell width="0.8in" padding="${cellPadding}"><fo:block>${ec.l10n.localize("Required By")}</fo:block></fo:table-cell>
+                        <fo:table-cell width="0.6in" padding="${cellPadding}"><fo:block text-align="center">${ec.l10n.localize("Qty")}</fo:block></fo:table-cell>
+                        <fo:table-cell width="0.9in" padding="${cellPadding}"><fo:block text-align="right">${ec.l10n.localize("Amount")}</fo:block></fo:table-cell>
+                        <fo:table-cell width="1in" padding="${cellPadding}"><fo:block text-align="right">${ec.l10n.localize("Total")}</fo:block></fo:table-cell>
                     </fo:table-header>
                     <fo:table-body>
                         <#list orderPartInfo.partOrderItemList as orderItem>
