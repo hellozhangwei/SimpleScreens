@@ -182,7 +182,28 @@ along with this software (see the LICENSE.md file). If not, see
                                         <fo:block><@encodeText ec.resource.expand("ProductNameTemplate", "", product)/></fo:block>
                                     </#if>
                                 </fo:table-cell>
-                                <#if showUpc><fo:table-cell padding="${cellPadding}"><fo:block><@encodeText itemUpc!""/></fo:block></fo:table-cell></#if>
+                                <#if showUpc><fo:table-cell padding="${cellPadding}">
+                                    <#--<fo:block><@encodeText itemUpc!""/></fo:block>-->
+                                    <#if itemUpc?has_content>
+                                        <fo:block text-align="right">
+                                            <fo:instream-foreign-object>
+                                                <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${itemUpc}">
+                                                    <barcode:code128>
+                                                        <barcode:height>0.4in</barcode:height>
+                                                        <barcode:module-width>0.3mm</barcode:module-width>
+                                                    </barcode:code128>
+                                                    <barcode:human-readable>
+                                                        <barcode:placement>bottom</barcode:placement>
+                                                        <barcode:font-name>Helvetica</barcode:font-name>
+                                                        <barcode:font-size>12pt</barcode:font-size>
+                                                        <barcode:display-start-stop>false</barcode:display-start-stop>
+                                                        <barcode:display-checksum>false</barcode:display-checksum>
+                                                    </barcode:human-readable>
+                                                </barcode:barcode>
+                                            </fo:instream-foreign-object>
+                                        </fo:block>
+                                    </#if>
+                                    </fo:table-cell></#if>
                                 <fo:table-cell padding="${cellPadding}"><fo:block>${ec.l10n.format(orderItem.requiredByDate, dateFormat)}</fo:block></fo:table-cell>
                                 <fo:table-cell padding="${cellPadding}"><fo:block text-align="center">${orderItem.quantity!"1"}</fo:block></fo:table-cell>
                                 <fo:table-cell padding="${cellPadding}"><fo:block text-align="right">${ec.l10n.formatCurrency(orderItem.unitAmount!0, orderHeader.currencyUomId, 2)}</fo:block></fo:table-cell>
@@ -195,7 +216,7 @@ along with this software (see the LICENSE.md file). If not, see
                             <fo:table-cell padding="${cellPadding}"><fo:block> </fo:block></fo:table-cell>
                             <fo:table-cell padding="${cellPadding}"><fo:block> </fo:block></fo:table-cell>
                             <fo:table-cell padding="${cellPadding}"><fo:block> </fo:block></fo:table-cell>
-                            <fo:table-cell padding="${cellPadding}"><fo:block text-align="right">Total</fo:block></fo:table-cell>
+                            <fo:table-cell padding="${cellPadding}"><fo:block text-align="right">${ec.l10n.localize("Total")}</fo:block></fo:table-cell>
                             <fo:table-cell padding="${cellPadding}"><fo:block text-align="right">${ec.l10n.formatCurrency(orderPart.partTotal, orderHeader.currencyUomId)}</fo:block></fo:table-cell>
                         </fo:table-row>
                     </fo:table-body>
