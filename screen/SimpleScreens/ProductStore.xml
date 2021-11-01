@@ -20,7 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="mantle.product.store.ProductStore" value-field="productStore"/>
     </actions>
     <widgets>
-        <link url="FindProductStore" text="Return to Product Store List" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="productStore"/>
+        <link url="FindProductStore" text="Return to Find Product Store" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="productStore"/>
         <label style="q-ma-md" text="${productStoreId}: ${productStore.storeName}" type="h4" condition="productStore"/>
         <subscreens-panel id="StorePanel" type="tab"/>
     </widgets>
