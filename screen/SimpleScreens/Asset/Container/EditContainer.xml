@@ -58,7 +58,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <form-single name="PickScanForm" transition="pickMoveProductToContainer">
                         <field name="toContainerId" from="containerId"><default-field><hidden/></default-field></field>
                         <field name="quantity" from="1"><default-field><text-line size="4"/></default-field></field>
-                        <field name="scanProduct"><default-field title=" Scan Product"><text-line size="40"/></default-field></field>
+                        <field name="scanProduct"><default-field title="Scan Product"><text-line size="40"/></default-field></field>
                         <field name="scanLocation"><default-field title="Scan From Location"><text-line size="40"/></default-field></field>
                         <field name="shipmentId"><default-field title="Shipment">
                             <drop-down allow-empty="true"><list-options list="shipmentList" key="${shipmentId}" text="${shipmentId}"/></drop-down>
