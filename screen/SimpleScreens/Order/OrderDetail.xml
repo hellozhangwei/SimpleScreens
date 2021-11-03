@@ -1029,7 +1029,7 @@ along with this software (see the LICENSE.md file). If not, see
                             <dynamic-dialog id="AddCreditCardDialog" button-text="New Credit Card"
                                     transition="UpdatePaymentMethodInfo" width="800"
                                     parameter-map="[partyId:customerPartyId, paymentMethodTypeEnumId:'PmtCreditCard', orderId:orderId]"/>
-                        </box-toolbar><box-body>
+                        </box-toolbar><box-body style="bg-white">
                             <label text="OrderDetailPartPaymentIncomplete"
                                     style="text-danger" type="p" condition="orderPartInfo.paymentsTotal &lt; orderPartInfo.orderPart.partTotal"/>
                             <label text="Payments total (${ec.l10n.formatCurrency(orderPartInfo.paymentsTotal ?: 0.0, orderHeader?.currencyUomId)}) is greater than order part total (${ec.l10n.formatCurrency(orderPartInfo.orderPart.partTotal ?: 0.0, orderHeader?.currencyUomId)})"
@@ -1091,7 +1091,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 width="800" condition="orderPartInfo.partEditable"
                                 parameter-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
                                     telecomContactMechPurposeId:'PhoneShippingDest', orderId:orderId, postalContactMechId:null]"/>
-                    </box-toolbar><box-body>
+                    </box-toolbar><box-body style="bg-white">
                         <section name="CurrentShippingAddress" condition="shippingAddressInfo != null"><actions>
                             <set field="contactInfo" from="shippingAddressInfo"/>
                         </actions><widgets>
