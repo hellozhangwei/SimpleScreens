@@ -208,25 +208,25 @@ along with this software (see the LICENSE.md file). If not, see
             - scan container move container... or select asset(s) in container as in scan location or product?
         -->
         <container-row><row-col sm="4">
-            <label text="Location " type="strong" condition="facilityLocation"/>
+            <label text="Location" type="strong" condition="facilityLocation"/>
             <label text="${ec.resource.expand('FacilityLocationNameTemplate', null, facilityLocation)}" type="span" condition="facilityLocation"/>
             <!-- show total quantities, should be one but iterate just in case -->
             <section-iterate name="LocAssetSummary" list="locAssetList" entry="locAsset"><widgets>
                 <label text="${ec.resource.expand('ProductNameTemplate', null, locAsset)} - Qty ${ec.l10n.format(locAsset.quantityOnHandTotal, null)}" type="div"/>
             </widgets></section-iterate>
         </row-col><row-col sm="4">
-            <label text="Container " type="strong" condition="container"/>
+            <label text="Container" type="strong" condition="container"/>
             <label text="${ec.resource.expand('ContainerNameTemplate', null, container)}" type="span" condition="container"/>
             <!-- show total quantities, should be one but iterate just in case -->
             <section-iterate name="ContAssetSummary" list="contAssetList" entry="contAsset"><widgets>
                 <label text="${ec.resource.expand('ProductNameTemplate', null, contAsset)} - Qty ${ec.l10n.format(contAsset.quantityOnHandTotal, null)}" type="div"/>
             </widgets></section-iterate>
         </row-col><row-col sm="4">
-            <label text="Product " type="strong" condition="product"/>
+            <label text="Product" type="strong" condition="product"/>
             <label text="${ec.resource.expand('ProductNameTemplate', null, product)}" type="span" condition="product"/>
         </row-col></container-row>
         <container>
-            <label text="Pick Locations " type="strong" condition="pickLocList"/>
+            <label text="Pick Locations" type="strong" condition="pickLocList"/>
             <section-iterate name="RecLocList" list="pickLocList" entry="recLoc"><widgets>
                 <label text="${locationSeqId?:''} ${description?:''} [${areaId?:' '}:${aisleId?:' '}:${sectionId?:' '}:${levelId?:' '}:${positionId?:' '}]"
                         text-map="recLoc" type="span"/>
@@ -241,6 +241,7 @@ along with this software (see the LICENSE.md file). If not, see
 
         <section name="MoveFormsSection" condition="product != null &amp;&amp; facilityId"><widgets>
             <container-row><row-col md="6">
+                <label text="Move to New Container" type="strong"/>
                 <form-single name="ScanMoveAssetForm" transition="moveProduct"><!-- NOTE: main scan field focused so don't focus this one like on MoveAsset: focus-field="scanLocation" -->
                     <field name="facilityId"><default-field><hidden/></default-field></field>
                     <field name="locationSeqId"><default-field><hidden/></default-field></field>
@@ -276,6 +277,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="submitButton"><default-field title="Move Asset(s)"><submit/></default-field></field>
                 </form-single>
             </row-col><row-col md="6">
+                <label text="Move to Existing Container" type="strong"/>
                 <form-single name="EnterMoveAssetForm" transition="moveProduct">
                     <field name="facilityId"><default-field><hidden/></default-field></field>
                     <field name="locationSeqId"><default-field><hidden/></default-field></field>
