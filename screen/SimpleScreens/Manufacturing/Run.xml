@@ -13,7 +13,14 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-title="Runs" default-menu-index="5">
+        default-menu-title="Production Run" default-menu-index="5">
     <subscreens default-item="FindRun"/>
-    <widgets><subscreens-panel id="RunPanel" type="tab"/></widgets>
+    <actions>
+        <entity-find-one entity-name="WorkEffort" value-field="workEffort"/>
+    </actions>
+    <widgets>
+        <link url="FindRun" text="Return to Find Production Run" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="workEffort"/>
+        <label style="q-ma-md" text="${workEffortId} : ${workEffort.workEffortName?:''}" text-map="facility" type="h4" condition="workEffort"/>
+        <subscreens-panel id="RunPanel" type="tab"/>
+    </widgets>
 </screen>
