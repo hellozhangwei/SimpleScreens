@@ -158,7 +158,7 @@ along with this software (see the LICENSE.md file). If not, see
 
         <container-box><box-header title="Shipments"/><box-toolbar>
             <link url="addShipment" text="Add Shipments"/>
-        </box-toolbar><box-body>
+        </box-toolbar><box-body-nopad>
             <form-list name="ListShipments" list="shipmentList" transition="updateShipment" multi="true">
                 <entity-find entity-name="mantle.shipment.ShipmentFindView" list="shipmentList">
                     <econdition field-name="shipWorkEffortId" from="workEffortId"/>
@@ -257,7 +257,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <form-list-column><field-ref name="packButton"/></form-list-column>
                 <form-list-column><field-ref name="removeButton"/></form-list-column>
             </form-list>
-        </box-body></container-box>
+        </box-body-nopad></container-box>
 
         <container-box>
             <box-header title="People Assigned"/>

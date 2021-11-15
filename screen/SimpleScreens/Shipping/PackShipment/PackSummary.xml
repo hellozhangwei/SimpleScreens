@@ -177,11 +177,11 @@ along with this software (see the LICENSE.md file). If not, see
                 <!-- Pack Completed dialog - disabled unless at least one item packed and non-empty packages have box type and weight -->
                 <container-dialog id="PackCompletedErrorDialog" button-text="Pack Completed" type="warning"
                         condition="statusPrePacked &amp;&amp; (!anyItemPacked || !packagesComplete)">
-                    <label text="No items packed" condition="!anyItemPacked" style="text-danger" type="p"/>
-                    <label text="Not all quantity of all items packed" condition="anyItemPacked &amp;&amp; !allItemsPacked" style="text-warning" type="p"/>
+                    <label text="No items packed" condition="!anyItemPacked" style="text-danger q-pa-sm" type="p"/>
+                    <label text="Not all quantity of all items packed" condition="anyItemPacked &amp;&amp; !allItemsPacked" style="text-warning q-pa-sm" type="p"/>
                     <section-iterate name="PackComplShipmentPackageList" list="shipmentPackageList" entry="shipmentPackage"><widgets>
-                        <label text="Package ${shipmentPackage.shipmentPackageSeqId} missing box type" condition="!shipmentPackage.shipmentBoxTypeId" style="text-danger" type="p"/>
-                        <label text="Package ${shipmentPackage.shipmentPackageSeqId} missing weight" condition="!shipmentPackage.weight" style="text-danger" type="p"/>
+                        <label text="Package ${shipmentPackage.shipmentPackageSeqId} missing box type" condition="!shipmentPackage.shipmentBoxTypeId" style="text-danger  q-pa-sm" type="p"/>
+                        <label text="Package ${shipmentPackage.shipmentPackageSeqId} missing weight" condition="!shipmentPackage.weight" style="text-danger  q-pa-sm" type="p"/>
                     </widgets></section-iterate>
                 </container-dialog>
 
@@ -323,7 +323,7 @@ along with this software (see the LICENSE.md file). If not, see
         </row-col><row-col md="6">
             <container-box><box-header>
                 <container style="text-strong">
-                    <label text="Pack Shipment "/>
+                    <label text="Pack Shipment"/>
                     <link url="shipmentDetail" text="${shipmentId}" link-type="anchor"/>
                     <label text=" (${statusItem.description})" condition="statusItem"/>
                 </container>
