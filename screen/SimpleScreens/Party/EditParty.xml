@@ -702,7 +702,7 @@ along with this software (see the LICENSE.md file). If not, see
                                         parameter-map="[partyId:accountRel.toPartyId]"/></default-field></field>
                             <field name="removeButton" align="right"><default-field title="">
                                 <link url="removeContact" icon="fa fa-trash" parameter-map="[partyRelationshipId:accountRel.partyRelationshipId]"
-                                        confirmation="Are you sure you want to remove this contact from the account?"/></default-field></field>
+                                        confirmation="Are you sure you want to remove this contact from the account?" button-flat="true"/></default-field></field>
                         </form-list>
                     </box-body></container-box>
                 </widgets></section>
