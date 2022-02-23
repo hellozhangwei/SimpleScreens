@@ -410,7 +410,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </entity-find>
                 </actions><widgets>
                     <container-box><box-header title="Promo Codes"/><box-toolbar>
-                        <container-dialog id="AddPromoCodeDialog" button-text="Add Promo Code">
+                        <container-dialog id="AddPromoCodeDialog" button-text="Add Promo Code" button-flat="true">
                             <form-single name="AddPromoCode" transition="addOrderPromoCode">
                                 <field name="orderId"><default-field><hidden/></default-field></field>
                                 <field name="promoCode"><default-field title="Any Promo Code"><text-line size="8"/></default-field></field>
@@ -478,7 +478,7 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <section name="NotesSection"><widgets>
                     <container-box><box-header title="Order Notes"/><box-toolbar>
-                        <container-dialog id="NewNoteDialog" button-text="Add Note">
+                        <container-dialog id="NewNoteDialog" button-text="Add Note" button-flat="true">
                             <form-single name="NewNoteForm" transition="createNote">
                                 <field name="orderId"><default-field><hidden/></default-field></field>
                                 <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
@@ -511,7 +511,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <econdition field-name="orderId"/><order-by field-name="-contentDate"/></entity-find>
                 </actions><widgets>
                     <container-box><box-header title="Attachments"/><box-toolbar>
-                        <container-dialog id="NewContentDialog" button-text="Add Attachment">
+                        <container-dialog id="NewContentDialog" button-text="Add Attachment" button-flat="true">
                             <form-single name="NewContentForm" transition="createContent">
                                 <field name="orderId"><default-field><hidden/></default-field></field>
                                 <field name="contentFile"><default-field><file/></default-field></field>
@@ -554,7 +554,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <set field="toAddresses" from="emailInfo.emailAddress"/>
                             </if>
                         </actions><widgets>
-                            <container-dialog id="SendPlacedEmailDialog" button-text="Send Email">
+                            <container-dialog id="SendPlacedEmailDialog" button-text="Send Email" button-flat="true">
                                 <form-single name="SendPlacedEmailForm" transition="sendOrderStoreEmail">
                                     <field name="orderId"><default-field><hidden/></default-field></field>
                                     <field name="forceByType"><default-field><hidden default-value="true"/></default-field></field>
@@ -581,7 +581,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
                             <field name="sendLink"><default-field title=""><link url="sendEmailMessage" text="Send"
                                     parameter-map="[emailMessageId:emailMessageId]" condition="!(statusId in ['ES_DRAFT', 'ES_CANCELLED'])"
-                                    confirmation="Send this email message?"/>
+                                    confirmation="Send this email message?" button-flat="true"/>
                             </default-field></field>
                         </form-list>
                     </box-body-nopad></container-box>
@@ -1027,7 +1027,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 </form-single>
                             </container-dialog>
                             <dynamic-dialog id="AddCreditCardDialog" button-text="New Credit Card"
-                                    transition="UpdatePaymentMethodInfo" width="800"
+                                    transition="UpdatePaymentMethodInfo" width="800" button-flat="true"
                                     parameter-map="[partyId:customerPartyId, paymentMethodTypeEnumId:'PmtCreditCard', orderId:orderId]"/>
                         </box-toolbar><box-body style="bg-white">
                             <label text="OrderDetailPartPaymentIncomplete"
@@ -1067,7 +1067,7 @@ along with this software (see the LICENSE.md file). If not, see
                                             <field name="submitButton"><default-field title="Authorize"><submit/></default-field></field>
                                         </form-single>
                                     </container-dialog>
-                                    <container-dialog id="GatewayHistoryDialog" button-text="Gateway History" condition="gatewayResponseList" width="900">
+                                    <container-dialog id="GatewayHistoryDialog" button-text="Gateway History" condition="gatewayResponseList" width="900" button-flat="true">
                                         <form-list name="GatewayResponseList" skip-form="true"
                                                 extends="component://SimpleScreens/screen/SimpleScreens/Accounting/Payment/EditPayment.xml#GatewayResponseList"/>
                                     </container-dialog>
@@ -1110,7 +1110,7 @@ along with this software (see the LICENSE.md file). If not, see
                                             type="strong" tooltip="${contactInfo.postalContactMech.validateMessage?:''}"/>
                                     <link url="validateAddress" text="Validate"
                                             parameter-map="[orderId:orderId, partyId:customerPartyId, facilityId:contactInfo.facilityId, contactMechId:contactInfo.postalContactMechId]"
-                                            condition="!contactInfo.postalContactMech.trustLevelEnumId || contactInfo.postalContactMech.trustLevelEnumId == 'CmtlNew'"/>
+                                            condition="!contactInfo.postalContactMech.trustLevelEnumId || contactInfo.postalContactMech.trustLevelEnumId == 'CmtlNew'" button-flat="true"/>
                                 </container>
                             </container></container>
                         </widgets></section>
@@ -1505,9 +1505,9 @@ along with this software (see the LICENSE.md file). If not, see
                                 condition="orderPartInfo.newerInventory &amp;&amp; newerThanExpireDate!=null &amp;&amp; oldestLotExpire!=null &amp;&amp; oldestLotExpire &lt; newerThanExpireDate"
                                 type="div" style="text-danger"/>
                         <dynamic-dialog id="ItemReserveDialog" button-text="Reserve Assets" transition="ItemReserve" width="960"
-                                condition="orderPartInfo.partEditable || orderPartInfo.orderPart.statusId == 'OrderApproved'"/>
+                                condition="orderPartInfo.partEditable || orderPartInfo.orderPart.statusId == 'OrderApproved'" button-flat="true"/>
                         <link url="removeOrderItemReservations" text="" btn-type="danger" icon="fa fa-trash" condition="resInfoList"
-                                confirmation="Remove inventory reservations for item ${orderItemSeqId}?"/>
+                                confirmation="Remove inventory reservations for item ${orderItemSeqId}?" button-flat="true"/>
                     </conditional-field>
                     <default-field><display text=" "/></default-field>
                 </field>
@@ -1545,7 +1545,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="cancelOrderItem" text="Close" btn-type="warning" link-type="hidden-form"
                             confirmation="Really close item? Quantity will be reduced to quantity shipped and remaining quantity (${ec.l10n.format(itemQuantityNotShipped, null)}) will be cancelled."
                             condition="isProductItemType &amp;&amp; itemQuantityNotShipped &amp;&amp; orderPartInfo.orderPart.statusId in ['OrderOpen', 'OrderPlaced', 'OrderProcessing', 'OrderApproved', 'OrderHold']"
-                            parameter-map="[orderItem:null]"/>
+                            parameter-map="[orderItem:null]" button-flat="true"/>
                 </default-field></field>
 
                 <form-list-column><field-ref name="orderItemSeqId"/><field-ref name="orderPartSeqId"/><field-ref name="parentItemSeqId"/></form-list-column>

@@ -118,7 +118,7 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="thruDate" from="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
 
             <field name="submitButton" align="right"><header-field title="Find"><submit/></header-field>
-                <default-field title=""><submit text="X"/></default-field></field>
+                <default-field title=""><submit icon="fa fa-trash" confirmation="Delete?" button-flat="true"/></default-field></field>
         </form-list>
 
         <form-list name="FromRelationshipForm" list="fromRelList" transition="updatePartyRelationship" header-dialog="true" saved-finds="true">
@@ -155,7 +155,7 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="thruDate" from="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
 
             <field name="submitButton" align="right"><header-field title="Find"><submit/></header-field>
-                <default-field title=""><submit text="X"/></default-field></field>
+                <default-field title=""><submit icon="fa fa-trash" confirmation="Delete?" button-flat="true"/></default-field></field>
         </form-list>
     </widgets>
 </screen>
