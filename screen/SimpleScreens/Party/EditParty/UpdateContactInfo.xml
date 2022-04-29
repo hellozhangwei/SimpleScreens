@@ -57,6 +57,11 @@ along with this software (see the LICENSE.md file). If not, see
                 <econdition field-name="contactMechTypeEnumId" value="CmtEmailAddress"/>
             </entity-find>
         </if>
+
+        <entity-find entity-name="mantle.party.contact.PartyContactMech" list="currentContactMechList">
+            <date-filter/><econdition field-name="partyId"/>
+            <select-field field-name="contactMechPurposeId"/>
+        </entity-find>
     </actions>
     <widgets>
         <form-single name="UpdateContactInfo" transition="storeContactInfo" map="contactInfoFlat"

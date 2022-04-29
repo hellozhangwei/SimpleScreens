@@ -303,10 +303,11 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="telecomContactMechPurposeId">
                 <conditional-field condition="telecomContactMechPurposeId"><hidden/></conditional-field>
                 <conditional-field condition="createTelecom" title="Phone Purpose">
-                    <drop-down no-current-selected-key="PhonePrimary">
+                    <drop-down>
                         <entity-options key="${contactMechPurposeId}" text="${description}">
                             <entity-find entity-name="mantle.party.contact.ContactMechPurpose">
                                 <econdition field-name="contactMechTypeEnumId" value="CmtTelecomNumber"/>
+                                <econdition field-name="contactMechPurposeId" operator="not-in" from="currentContactMechList?.contactMechPurposeId" ignore-if-empty="true"/>
                                 <order-by field-name="description"/>
                             </entity-find>
                         </entity-options>
@@ -359,10 +360,11 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="emailContactMechPurposeId">
                 <conditional-field condition="emailContactMechPurposeId"><hidden/></conditional-field>
                 <conditional-field condition="createEmail" title="Email Purpose">
-                    <drop-down no-current-selected-key="EmailPrimary">
+                    <drop-down>
                         <entity-options key="${contactMechPurposeId}" text="${description}">
                             <entity-find entity-name="mantle.party.contact.ContactMechPurpose">
                                 <econdition field-name="contactMechTypeEnumId" value="CmtEmailAddress"/>
+                                <econdition field-name="contactMechPurposeId" operator="not-in" from="currentContactMechList?.contactMechPurposeId" ignore-if-empty="true"/>
                                 <order-by field-name="description"/>
                             </entity-find>
                         </entity-options>
@@ -417,13 +419,13 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <field-ref name="telecomContactMechPurposeId"/>
                 <field-ref name="telecomContactMechId"/>
-                <field-row-big title="Phone"><field-ref name="countryCode"/><field-ref name="areaCode"/>
-                    <field-ref name="contactNumber"/><field-ref name="telecomExtension"/></field-row-big>
+                <field-row-big title="Phone"><!--<field-ref name="countryCode"/><field-ref name="areaCode"/>-->
+                    <field-ref name="contactNumber"/><!--<field-ref name="telecomExtension"/>--></field-row-big>
 
                 <field-ref name="emailContactMechPurposeId"/>
                 <field-ref name="emailContactMechId"/>
                 <field-ref name="emailAddress"/>
-                <fields-not-referenced/>
+                <!--<fields-not-referenced/>-->
                 <field-ref name="submitButton"/>
             </field-layout>
         </form-single>
