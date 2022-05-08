@@ -408,7 +408,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field-ref name="toName"/>
                 <field-ref name="attnName"/>
 
-                <field-row-big title="Address 1"><field-ref name="address1"/><field-ref name="unitNumber"/></field-row-big>
+                <field-row-big title="Address 1 *"><field-ref name="address1"/><field-ref name="unitNumber"/></field-row-big>
                 <field-ref name="address2"/>
                 <field-row-big title="City/Zip"><field-ref name="city"/>
                     <field-ref name="postalCode"/><field-ref name="postalCodeExt"/></field-row-big>
