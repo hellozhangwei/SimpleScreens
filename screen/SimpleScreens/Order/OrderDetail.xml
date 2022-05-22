@@ -682,7 +682,7 @@ along with this software (see the LICENSE.md file). If not, see
             <set field="shippingAddressInfo" from="orderPart.postalContactMechId ? shippingPostalAddressList.find({ orderPart.postalContactMechId.equals(it.postalContactMechId) }) : null"/>
         </actions>
             <widgets>
-            <container style="bg-green-2 q-pa-md q-ma-sm q-card--bordered rounded-borders">
+            <container style="bg-blue-grey-1 q-pa-md q-ma-sm q-card--bordered rounded-borders">
             <container-row >
                 <row-col lg="5">
                     <container><label text="${orderPartInfo.isVendorInternalOrg ? 'Sales' : 'Purchase'} Order Part ${orderPart.orderPartSeqId}" type="h4"/></container>
