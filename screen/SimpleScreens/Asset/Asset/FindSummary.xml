@@ -12,8 +12,8 @@ You should have received a copy of the CC0 Public Domain Dedication
 along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
-<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-include="false" default-menu-index="2" default-menu-title="Asset Summary">
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-include="false" default-menu-index="2">
 
     <transition name="findAsset"><default-response url="../FindAsset"/></transition>
     <transition name="editProduct"><default-response url="//${appRoot}/Catalog/Product/EditProduct"/></transition>
@@ -46,9 +46,6 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="org.moqui.impl.BasicServices.find#Enumeration" in-map="[enumTypeId:'RejectionReason']" out-map="reasonOut"/>
     </actions>
     <widgets>
-        <label text="Asset Summary"  style="row q-my-md text-h3"/>
-
-        <container style="q-mb-sm">
         <link url="../FindAsset" text="Find Individual Assets"/>
         <link url="../SelectAsset" text="Move Asset"/>
         <link url="../../Container" text="Containers"/>
@@ -57,7 +54,7 @@ along with this software (see the LICENSE.md file). If not, see
         <link url="assetOnHand" text="On Hand Report"/>
 
         <container-dialog id="ReceiveAssetDialog" button-text="Receive Direct" width="800">
-            <label text="NOTE: only receive inventory here if there is no Purchase Order and no Incoming Shipment for the inventory." type="div" style="q-pa-md bg-warning"/>
+            <label text="NOTE: only receive inventory here if there is no Purchase Order and no Incoming Shipment for the inventory." type="p" style="text-warning"/>
             <form-single name="ReceiveAssetForm" transition="receiveAsset">
                 <field name="productId"><default-field title="Product*"><drop-down>
                     <dynamic-options transition="getProductList" server-search="true" min-length="2"/></drop-down></default-field></field>
@@ -98,7 +95,7 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <field name="acquireCost"><default-field><text-line size="8" format="#,##0.00"/></default-field></field>
                 <field name="quantity"><default-field title="Quantity*"><text-line size="8"/></default-field></field>
-                <field name="serialNumber"><default-field><text-line/></default-field></field>
+
                 <field name="facilityId"><default-field title="Facility*"><drop-down>
                     <dynamic-options transition="getFacilityList" server-search="true" min-length="0"/></drop-down></default-field></field>
                 <field name="locationSeqId"><default-field title="Location"><drop-down allow-empty="true">
@@ -119,7 +116,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field-layout>
                     <field-ref name="productId"/>
                     <field-row><field-ref name="statusId"/><field-ref name="receivedDate"/></field-row>
-                    <field-row><field-ref name="quantity"/><field-ref name="serialNumber"/></field-row>
+                    <field-row><field-ref name="quantity"/></field-row>
                     <field-ref name="facilityId"/><field-ref name="ownerPartyId"/><field-ref name="assetPoolId"/>
                     <field-ref name="locationSeqId"/><field-ref name="containerId"/>
                     <field-ref name="mfgPartyId"/><field-ref name="lotId"/><field-ref name="lotNumber"/>
@@ -173,7 +170,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field name="submitButton"><default-field title="Record"><submit/></default-field></field>
             </form-single>
         </container-dialog>
-        </container>
+
         <form-list name="AssetSummary" list="assetList" skip-form="true" header-dialog="true" saved-finds="true"
                 select-columns="true" show-csv-button="true" show-xlsx-button="true" show-all-button="true">
             <entity-find entity-name="mantle.product.asset.AssetSummaryView" list="assetList" use-clone="true">
@@ -194,7 +191,7 @@ along with this software (see the LICENSE.md file). If not, see
             </header-field></field>
 
             <field name="assetsLink">
-                <default-field title="Assets"><link url="findAsset" text="Individual Assets" parameter-map="[productId:productId, statusId:statusId,
+                <default-field title="Assets"><link url="findAsset" text="Assets" parameter-map="[productId:productId, statusId:statusId,
                             facilityId:facilityId, locationSeqId:locationSeqId, lotId:lotId]" condition="pseudoId"/></default-field>
             </field>
             <field name="productId"><header-field title="Product"><drop-down allow-empty="true">
