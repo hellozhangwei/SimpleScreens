@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-include="false" standalone="true" allow-extra-path="true">
+
+    <parameter name="orderId" required="true"/>
+
+    <actions>
+        <log level="info" message="Entering ViewPrintPdf.xml filename ${filename}"/>
+        <log level="info" message="Entering ViewPrintPdf.xml orderId ${orderId}"/>
+    </actions>
+    <widgets>
+        <render-mode><text type="html,js,vuet,qvt"><![CDATA[
+            <html><body>
+            <div id="adobe-dc-view"></div>
+            <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+            <script type="text/javascript">
+            // Store the UI options in a constant
+            // JavaScript anonymous function
+            (() => {
+                if (window.localStorage) {
+                    // If there is no item as 'reload'
+                    // in local storage then create one &
+                    // reload the page
+                    if (!localStorage.getItem('reload')) {
+                        localStorage['reload'] = true;
+                        window.location.reload();
+                    } else {
+
+                        // If there exists a 'reload' item
+                        // then clear the 'reload' item in
+                        // local storage
+                        localStorage.removeItem('reload');
+                    }
+                }
+            })(); // Calling anonymous function here only
+
+            const previewConfig = {
+               showDownloadPDF: false,
+               showPageControls: true, //showPageControls needs to be true when showZoomControl: true
+               showZoomControl: true,
+               showAnnotationTools: false,
+               embedMode: "FULL_WINDOW",  // embedMode includes LIGHT_BOX, FULL_WINDOW
+               showPrintPDF: true
+            }
+
+            const saveOptions = {
+                   autoSaveFrequency: 0,
+                   enableFocusPolling: false,
+                   showSaveButton: false
+            }
+            document.addEventListener("adobe_dc_view_sdk.ready", function () {
+               var adobeDCView = new AdobeDC.View({clientId: "40f5598045e64160babc289e96b45054", divId: "adobe-dc-view"});
+
+               // Consume previewConfig here. . .
+               adobeDCView.previewFile({
+                  content:{location: {url: "/ssstatic/OrderSample.pdf"}},
+                  //content:{location: {url: "/apps/marble/Order/PrintOrder.pdf?orderId=${orderId}"}},
+                  metaData:{fileName: "Order.pdf"},
+          }, previewConfig);
+
+               adobeDCView.registerCallback(
+                   AdobeDC.View.Enum.CallbackType.SAVE_API,
+                   function(metaData, content, options) {
+                      /* Add your custom save implementation here...and based on that resolve or reject response in given format */
+                      return new Promise((resolve, reject) => {
+                         resolve({
+                            code: AdobeDC.View.Enum.ApiResponseCode.SUCCESS,
+                            data: {
+                               /* Updated file metadata after successful save operation */
+                               metaData: {fileName: "Order.pdf"}
+                            }
+                         });
+                      });
+                   },
+                   saveOptions);
+
+            });
+            </script>
+            </body></html>
+            ]]></text></render-mode>
+    </widgets>
+</screen>

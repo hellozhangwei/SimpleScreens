@@ -163,6 +163,11 @@ along with this software (see the LICENSE.md file). If not, see
             <parameter name="orderId"/><parameter name="filename" value="Order-${orderId}.pdf"/>
         </default-response>
     </transition>
+    <transition name="ViewOrder.pdf">
+        <default-response url="../ViewOrderPdf" >
+            <parameter name="orderId"/>
+        </default-response>
+    </transition>
 
     <transition name="setItemLimit"><actions><script>ec.user.setPreference('order.detail.item.limit', itemLimit)</script></actions>
         <default-response url="."/></transition>
@@ -281,6 +286,7 @@ along with this software (see the LICENSE.md file). If not, see
                         condition="ec.user.hasPermission('ORDER_APPROVE') &amp;&amp; orderHeader.statusId == 'OrderCompleted'"/>
 
                 <link url="PrintOrder.pdf" text="Order PDF"/>
+                <link url="ViewOrder.pdf" text="View Order PDF"/>
 
                 <link url="cloneOrder" text="Clone" confirmation="Create new order based on this one?" parameter-map="[baseOrderId:orderId]"/>
                 <container-dialog id="RecurDialog" button-text="Recurring" type="${orderHeader.recurCronExpression ? (orderHeader.statusId == 'OrderApproved' ? 'success' : 'warning') : 'primary'}">
