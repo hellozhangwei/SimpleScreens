@@ -16,5 +16,11 @@ along with this software (see the LICENSE.md file). If not, see
         default-menu-title="Picklists" default-menu-index="3" menu-image="/ssstatic/images/Picking.png">
 
     <subscreens default-item="FindPicklist"/>
-    <widgets><subscreens-panel id="PicklistPanel" type="tab"/></widgets>
+
+    <widgets>
+        <link url="FindPicklist" text="Return to Find Picklist" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="workEffortId"/>
+        <label text="Picklist ${workEffortId}" type="div" condition="workEffortId" style="q-ma-md text-h3"/>
+        <subscreens-panel id="PicklistPanel" type="tab"/>
+    </widgets>
+
 </screen>

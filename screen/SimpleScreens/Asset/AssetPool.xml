@@ -16,5 +16,10 @@ along with this software (see the LICENSE.md file). If not, see
         default-menu-title="Pools" default-menu-index="7">
 
     <subscreens default-item="FindAssetPool"/>
-    <widgets><subscreens-active id="AssetPoolPanel"/></widgets>
+
+    <widgets>
+        <link url="FindAssetPool" text="Return to Find Pool" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="assetPoolId"/>
+        <label text="Pool ${assetPoolId}" type="div" condition="assetPoolId" style="q-ma-md text-h3"/>
+        <subscreens-panel id="AssetPoolPanel"/>
+    </widgets>
 </screen>
