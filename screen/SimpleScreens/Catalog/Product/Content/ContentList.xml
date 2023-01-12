@@ -31,6 +31,25 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response type="none"/>
     </transition>
 
+    <!--Copied from PopCommerce/screen/PopCommerceRoot/Product/Detail.xml-->
+    <transition name="image" read-only="true">
+        <parameter name="productContentId"/>
+        <actions>
+            <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
+            <if condition="extraPathNameList &amp;&amp; !productContentId">
+                <set field="productContentId" from="extraPathNameList[0]"/></if>
+            <entity-find-one entity-name="mantle.product.ProductContent" value-field="productContent" cache="true">
+                <field-map field-name="productContentId"/></entity-find-one>
+            <if condition="productContent == null"><then>
+                <!-- NOTE: consider returning a default image instead of 404 -->
+                <script>ec.web.sendError(404, null, null)</script>
+            </then><else>
+                <script>ec.web.sendResourceResponse(productContent.contentLocation, true)</script>
+            </else></if>
+        </actions>
+        <default-response type="none"/>
+    </transition>
+
     <actions>
         <entity-find entity-name="mantle.product.ProductContent" list="contentList">
             <search-form-inputs default-order-by="productContentTypeEnumId,sequenceNum,-fromDate"/>
@@ -89,6 +108,9 @@ along with this software (see the LICENSE.md file). If not, see
             </container-dialog>
         </box-toolbar><box-body-nopad>
             <form-list name="ContentList" list="contentList" skip-form="true" header-dialog="true">
+                <row-actions>
+                    <set field="ref" from="ec.resource.getLocationReference(contentLocation)"/>
+                </row-actions>
                 <field name="download"><default-field title="">
                     <link url="downloadContent" text="Download" condition="contentLocation" tooltip="${contentLocation}"/>
                 </default-field></field>
@@ -125,7 +147,13 @@ along with this software (see the LICENSE.md file). If not, see
                     <default-field><display/></default-field></field>
                 <field name="contentLocation"><header-field title="Location" show-order-by="true"><text-find hide-options="true"/></header-field>
                     <default-field tooltip="${contentLocation}"><display text="${contentLocation ? contentLocation.substring(contentLocation.lastIndexOf('/')+1) : 'No location set'}"/></default-field></field>
-
+                <field name="contentType"><default-field><display text="${ref.contentType}"/></default-field></field>
+                <field name="thumbnail"><conditional-field condition="ref.contentType=='image/jpeg'">
+                    <image url="image/${productContentId}" url-type="transition" alt="${description}" width="64" style="img-thumbnail"/>
+                    </conditional-field><default-field>
+                        <ignored/>
+                    </default-field>
+                </field>
                 <form-list-column><field-ref name="download"/></form-list-column>
                 <form-list-column><field-ref name="detail"/></form-list-column>
                 <form-list-column><field-ref name="productContentId"/></form-list-column>
@@ -136,6 +164,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <form-list-column><field-ref name="userId"/></form-list-column>
                 <form-list-column><field-ref name="fromDate"/><field-ref name="thruDate"/></form-list-column>
                 <form-list-column><field-ref name="description"/><field-ref name="contentLocation"/></form-list-column>
+                <form-list-column><field-ref name="contentType"/><field-ref name="thumbnail"/></form-list-column>
             </form-list>
         </box-body-nopad></container-box>
     </widgets>
