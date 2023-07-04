@@ -120,7 +120,7 @@ along with this software (see the LICENSE.md file). If not, see
             <econdition field-name="contentLocation" operator="not-equals" value=""/>
             <order-by field-name="-contentDate"/>
         </entity-find>
-        <set field="partyContentId" from="contentList?.first.partyContentId"/>
+        <set field="partyContentId" from="contentList?.first?.partyContentId"/>
 
     </actions>
     <widgets>
