@@ -493,7 +493,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container>
             </widgets></section>
 
-            <container type="dl" style="dl-horizontal q-card--bordered rounded-borders">
+            <container type="dl" style="q-ma-sm dl-horizontal q-card--bordered rounded-borders">
                 <label text="Store" type="dt" condition="productStore != null"/>
                 <label text="${productStore.productStoreId}: ${productStore.storeName}" type="dd" condition="productStore != null"/>
                 <label text="Shipping Gateway" type="dt" condition="shippingGatewayConfig != null"/>
@@ -503,7 +503,7 @@ along with this software (see the LICENSE.md file). If not, see
             </container>
 
             <!-- Main/Header Form -->
-            <form-single name="EditShipment" transition="updateShipment" map="shipment" container-style="rounded-borders">
+            <form-single name="EditShipment" transition="updateShipment" map="shipment" container-style="q-ma-sm rounded-borders">
                 <field name="shipmentId"><default-field><hidden/></default-field></field>
 
                 <field name="originPostalContactMechId" from="firstRouteSegment.originPostalContactMechId">
