@@ -18,12 +18,14 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="orderId" from="orderId ?: orderId_0" required="true"/>
     <parameter name="orderPartSeqId" from="orderPartSeqId ?: orderPartSeqId_0"/>
     <parameter name="productCategoryId" from="productCategoryId ?: productCategoryId_0"/>
+    <parameter name="virtualProductId" from="virtualProductId ?: virtualProductId_0"/>
+    <transition-include name="getProductList" location="component://SimpleScreens/template/product/ProductTransitions.xml"/>
 
     <transition name="editProduct"><default-response url="//${appRoot}/Product/EditProduct"/></transition>
 
     <transition name="setItemQuantities">
         <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" multi="true"
-                in-map="context + [addToQuantity:false, requireInventory:false, quantity:0, customerPartyId:null]"/>
+                      in-map="context + [addToQuantity:false, requireInventory:false, quantity:0, customerPartyId:null]"/>
         <actions><log message="Order ${orderId} setItemQuantities parameters: ${ec.web.requestParameters}"/></actions>
         <default-response url="."/>
     </transition>
@@ -57,11 +59,21 @@ along with this software (see the LICENSE.md file). If not, see
             </if>
 
             <set field="productInfoList" from="[]"/>
+
+            <if condition="virtualProductId">
+                <entity-find entity-name="ProductAssocAndTo" list="paatList">
+                    <date-filter/><econdition field-name="productId" from="virtualProductId"/>
+                </entity-find>
+            </if>
+
+            <set field="toProductIds" from="paatList?.toProductId"/>
+
             <if condition="productCategoryId">
-                <entity-find entity-name="ProductCategoryMemberProduct" list="productList" cache="true">
+                <entity-find entity-name="ProductCategoryMemberProduct" list="productList" cache="false">
                     <date-filter/>
                     <econdition field-name="productCategoryId"/>
-                    <econdition field-name="productTypeEnumId" operator="not-equals" value="PtVirtual"/>
+                    <econdition field-name="productId" operator="in" from="toProductIds" ignore-if-empty="true"/>
+                    <econdition field-name="productTypeEnumId" operator="not-equals" value="PtVirtual" ignore="virtualProductId"/><!--if a virtual product is selected, ignore this condition-->
                 </entity-find>
             </if>
 
@@ -115,8 +127,11 @@ along with this software (see the LICENSE.md file). If not, see
                         <econdition field-name="productCategoryTypeEnumId" operator="in" value="PctQuickAdd,PctSearch,PctCatalog"/>
                         <order-by field-name="categoryName"/></entity-find></entity-options>
             </drop-down></default-field></field>
+            <field name="virtualProductId"><default-field title="Virtual Product">
+                <drop-down allow-empty="true"><dynamic-options transition="getProductList" server-search="true" min-length="0" depends-optional="true" parameter-map="[productTypeEnumId:'PtVirtual']">
+                </dynamic-options></drop-down></default-field></field>
             <field name="submitButton"><default-field title="Select"><submit/></default-field></field>
-            <field-layout><field-row-big><field-ref name="orderPartSeqId"/><field-ref name="productCategoryId"/>
+            <field-layout><field-row-big><field-ref name="orderPartSeqId"/><field-ref name="productCategoryId"/><field-ref name="virtualProductId"/>
                 <field-ref name="submitButton"/></field-row-big></field-layout>
         </form-single>
 
@@ -124,7 +139,7 @@ along with this software (see the LICENSE.md file). If not, see
             <form-list name="QuickItemList" list="productInfoList" multi="true" transition="setItemQuantities">
                 <row-actions>
                     <service-call name="mantle.product.PriceServices.get#ProductPrice" out-map="priceOut"
-                            in-map="[productId:productId, priceUomId:orderHeader.currencyUomId,
+                                  in-map="[productId:productId, priceUomId:orderHeader.currencyUomId,
                                 productStoreId:productStoreId, customerPartyId:orderPart.customerPartyId]"/>
                 </row-actions>
 
