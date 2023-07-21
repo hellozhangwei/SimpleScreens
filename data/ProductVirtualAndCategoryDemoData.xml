@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<entity-facade-xml type="demo">
+    <!-- It is used for quick add virtual product to an order -->
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BL_XL" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BL_LG" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BL_MD" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BL_SM" fromDate="0"/>
+
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BU_XL" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BU_LG" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BU_MD" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_BU_SM" fromDate="0"/>
+
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_RD_XL" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_RD_LG" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_RD_MD" fromDate="0"/>
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcAllProducts" productId="DEMO_VAR_RD_SM" fromDate="0"/>
+
+</entity-facade-xml>
