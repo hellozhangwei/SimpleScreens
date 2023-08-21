@@ -19,7 +19,9 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="mantle.party.PartyDetail" value-field="partyDetail"/>
     </actions>
     <widgets>
-        <link url="FindParty" text="Return to Find Party" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="partyDetail"/>
+        <container style="row">
+            <link url="FindParty" text="Return to Find Party" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey" condition="partyDetail"/>
+        </container>
         <label text="PartyNameTemplate" text-map="partyDetail" type="div" condition="partyDetail" style="row q-mb-md text-h3"/>
         <subscreens-panel id="PartyPanel" type="tab"/>
     </widgets>

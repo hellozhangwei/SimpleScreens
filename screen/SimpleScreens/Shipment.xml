@@ -18,7 +18,9 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="FindShipment"/>
 
     <widgets>
-        <link url="FindShipment" text="Return to Find Shipment" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="shipmentId"/>
+        <container style="row">
+            <link url="FindShipment" text="Return to Find Shipment" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey" condition="shipmentId"/>
+        </container>
         <label text="Shipment ${shipmentId}" type="div" condition="shipmentId" style="q-ma-md text-h3"/>
         <subscreens-panel id="ShipmentPanel"/>
     </widgets>

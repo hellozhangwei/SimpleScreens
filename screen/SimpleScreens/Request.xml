@@ -17,7 +17,9 @@ along with this software (see the LICENSE.md file). If not, see
 
     <subscreens default-item="FindRequest"/>
     <widgets>
-        <link url="FindRequest" text="Return to Find Request" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="requestId"/>
+        <container style="row">
+            <link url="FindRequest" text="Return to Find Request" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey" condition="requestId"/>
+        </container>
         <label text="Request ${requestId}" type="div" condition="requestId" style="q-ma-md text-h3"/>
         <subscreens-panel id="RequestPanel" type="tab"/>
     </widgets>

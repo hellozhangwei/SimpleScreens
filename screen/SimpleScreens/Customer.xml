@@ -24,7 +24,9 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="mantle.party.PartyDetail" value-field="partyDetail"/>
     </actions>
     <widgets>
-        <link url="FindCustomer" text="Return to Customer List" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="partyDetail"/>
+        <container style="row">
+            <link url="FindCustomer" text="Return to Customer List" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey" condition="partyDetail"/>
+        </container>
         <label style="q-ma-md" text="PartyNameTemplate" text-map="partyDetail" type="h4" condition="partyDetail"/>
         <subscreens-panel id="CustomerPanel" type="tab"/>
     </widgets>

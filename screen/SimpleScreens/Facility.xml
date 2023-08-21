@@ -20,7 +20,9 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="mantle.facility.Facility" value-field="facility"/>
     </actions>
     <widgets>
-        <link url="FindFacility" text="Return to Find Facility" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="facility"/>
+        <container style="row">
+            <link url="FindFacility" text="Return to Find Facility" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey" condition="facility"/>
+        </container>
         <label style="q-ma-md" text="FacilityNameTemplate" text-map="facility" type="h4" condition="facility"/>
         <subscreens-panel id="FacilityPanel" type="tab"/>
     </widgets>

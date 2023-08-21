@@ -22,7 +22,9 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
     </actions>
     <widgets>
-        <link url="FindProduct" text="Return to Find Product" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md block text-grey" condition="product"/>
+        <container style="row">
+            <link url="FindProduct" text="Return to Find Product" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey" condition="product"/>
+        </container>
         <section name="SearchProduct" condition="product">
             <actions>
                 <set field="productId" value=""/>
