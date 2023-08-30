@@ -46,7 +46,7 @@ along with this software (see the LICENSE.md file). If not, see
         <container-row><row-col lg="9">
             <container-box><box-header title="Edit Content"/><box-toolbar>
                 <link url="downloadContent" text="Download" condition="productContent.contentLocation" tooltip="${productContent.contentLocation}"/>
-            </box-toolbar><box-body>
+            </box-toolbar><box-body-nopad>
                 <form-single name="UpdateContentForm" transition="updateContent" map="productContent">
                     <field name="productId"><default-field><hidden/></default-field></field>
                     <field name="productContentId"><default-field title="ID"><display/></default-field></field>
@@ -75,16 +75,16 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="thruDate"><default-field><date-time/></default-field></field>
                     <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
                 </form-single>
-            </box-body></container-box>
+            </box-body-nopad></container-box>
             <section name="EditTextSection" condition="isText"><widgets>
-                <container-box><box-header title="Edit HTML"/><box-body>
+                <container-box><box-header title="Edit HTML"/><box-body-nopad>
                     <form-single name="UpdateTextForm" transition="updateContent" map="productContent">
                         <field name="productId"><default-field><hidden/></default-field></field>
                         <field name="productContentId"><default-field><hidden/></default-field></field>
                         <field name="contentText"><default-field title=""><text-area cols="110" rows="15" editor-type="html"/></default-field></field>
                         <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
                     </form-single>
-                </box-body></container-box>
+                </box-body-nopad></container-box>
             </widgets></section>
         </row-col><row-col lg="3">
             <container-box><box-header title="History"/><box-body>
