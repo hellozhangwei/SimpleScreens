@@ -146,7 +146,7 @@ along with this software (see the LICENSE.md file). If not, see
 
             <row-selection id-field="productId" parameter="productIdList" list-mode="true">
                 <action>
-                    <dialog button-text="Add to Category" title="Add Selected Products to Category"/>
+                    <dialog button-text="Add to Category" title="Add Selected Products to Category" button-flat="true"/>
                     <form-single name="AddCategoryFormSelection" transition="addProductCategory" pass-through-parameters="true">
                         <field name="productCategoryId"><default-field title="Category">
                             <drop-down><dynamic-options transition="getCategoryList" server-search="true" min-length="0"/></drop-down>
@@ -155,7 +155,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </action>
                 <action>
-                    <dialog button-text="Remove from Category" title="Remove Selected Products from Category"/>
+                    <dialog button-text="Remove from Category" title="Remove Selected Products from Category" button-flat="true"/>
                     <form-single name="RemoveCategoryFormSelection" transition="removeProductCategory" pass-through-parameters="true">
                         <field name="productCategoryId"><default-field title="Category">
                             <drop-down><dynamic-options transition="getCategoryList" server-search="true" min-length="0"/></drop-down>
@@ -164,7 +164,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </action>
                 <action>
-                    <dialog button-text="Add Feature" title="Add Feature to Selected Products"/>
+                    <dialog button-text="Add Feature" title="Add Feature to Selected Products" button-flat="true"/>
                     <form-single name="AddFeatureFormSelection" transition="addProductFeature" pass-through-parameters="true">
                         <field name="productFeatureId"><default-field title="Feature">
                             <drop-down allow-empty="true"><dynamic-options transition="getFeatureList" server-search="true" min-length="0"/></drop-down>
@@ -180,7 +180,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </action>
                 <action>
-                    <dialog button-text="Remove Feature" title="Remove Feature from Selected Products"/>
+                    <dialog button-text="Remove Feature" title="Remove Feature from Selected Products" button-flat="true"/>
                     <form-single name="RemoveFeatureFormSelection" transition="removeProductFeature" pass-through-parameters="true">
                         <field name="productFeatureId"><default-field title="Feature">
                             <drop-down allow-empty="true"><dynamic-options transition="getFeatureList" server-search="true" min-length="0"/></drop-down>
