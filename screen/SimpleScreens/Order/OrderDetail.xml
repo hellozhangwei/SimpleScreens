@@ -1053,7 +1053,7 @@ along with this software (see the LICENSE.md file). If not, see
                                     <econdition field-name="paymentId" from="partPaymentInfo.partPayment.paymentId"/>
                                     <order-by field-name="-transactionDate"/></entity-find>
                             </actions><widgets>
-                                <container>
+                                <container style="q-ma-sm q-pa-sm q-card q-card--bordered q-card--flat no-shadow">
                                     <label text="${partPaymentInfo.paymentMethodTypeEnum?.description?:(partPaymentInfo.paymentInstrumentEnum?.description?:'')} (${partPaymentInfo.paymentTypeEnum?.description}):"/>
                                     <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId)}" type="strong"/>
                                     <label text="Status:"/>
@@ -1109,7 +1109,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <section name="CurrentShippingAddress" condition="shippingAddressInfo != null"><actions>
                             <set field="contactInfo" from="shippingAddressInfo"/>
                         </actions><widgets>
-                            <container style="row"><container style="col-sm-6">
+                            <container style="row q-ma-sm q-pa-sm q-card q-card--bordered q-card--flat no-shadow"><container style="col-sm-6">
                                 <text type="html,vuet,qvt" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/>
                             </container><container style="col-sm-6">
                                 <dynamic-dialog id="UpdatePostalInfo" button-text="Update Address" transition="UpdateContactInfo"
@@ -1132,9 +1132,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <label text="No shipment method selected" style="text-warning" type="p"
                                 condition="!orderPartInfo.isCustomerInternalOrg &amp;&amp; !orderPart.shipmentMethodEnumId"/>
 
-                        <container type="hr"/>
-
-                        <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo" map="orderPartInfo.orderPart">
+                        <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo" map="orderPartInfo.orderPart" container-style="q-ma-sm">
                             <field name="orderId"><default-field><hidden/></default-field></field>
                             <field name="orderPartSeqId"><default-field><hidden/></default-field></field>
                             <field name="paymentMethodId"><default-field><hidden/></default-field></field>
