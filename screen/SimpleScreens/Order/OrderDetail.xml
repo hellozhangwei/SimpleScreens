@@ -1053,7 +1053,7 @@ along with this software (see the LICENSE.md file). If not, see
                                     <econdition field-name="paymentId" from="partPaymentInfo.partPayment.paymentId"/>
                                     <order-by field-name="-transactionDate"/></entity-find>
                             </actions><widgets>
-                                <container style="q-ma-sm q-pa-sm q-card q-card--bordered q-card--flat no-shadow">
+                                <container style="q-ma-sm q-pa-sm q-card q-card--bordered q-card--flat no-shadow border-secondary">
                                     <label text="${partPaymentInfo.paymentMethodTypeEnum?.description?:(partPaymentInfo.paymentInstrumentEnum?.description?:'')} (${partPaymentInfo.paymentTypeEnum?.description}):"/>
                                     <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId)}" type="strong"/>
                                     <label text="Status:"/>
