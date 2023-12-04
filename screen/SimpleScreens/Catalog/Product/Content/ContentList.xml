@@ -148,7 +148,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field name="contentLocation"><header-field title="Location" show-order-by="true"><text-find hide-options="true"/></header-field>
                     <default-field tooltip="${contentLocation}"><display text="${contentLocation ? contentLocation.substring(contentLocation.lastIndexOf('/')+1) : 'No location set'}"/></default-field></field>
                 <field name="contentType"><default-field><display text="${ref.contentType}"/></default-field></field>
-                <field name="thumbnail"><conditional-field condition="ref.contentType=='image/jpeg'">
+                <field name="thumbnail"><conditional-field condition="ref.contentType?.startsWith('image/')">
                     <image url="image/${productContentId}" url-type="transition" alt="${description}" width="64" style="img-thumbnail"/>
                     </conditional-field><default-field>
                         <ignored/>
