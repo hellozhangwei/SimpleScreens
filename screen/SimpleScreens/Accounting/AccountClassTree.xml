@@ -19,68 +19,29 @@ along with this software (see the LICENSE.md file). If not, see
         'ASSET', 'LIABILITY', 'EQUITY', 'DISTRIBUTION'属于BS
         'REVENUE', 'COST_OF_SALES', 'INCOME', 'EXPENSE', 'NON_OP_EXPENSE'属于P&L
         -->
-        <section name="DEBIT">
-            <actions>
-                <set field="rootEnumId" value="DEBIT"/>
-            </actions>
-            <widgets>
-                <tree name="CategoryTree" open-path="${idPathSb.toString()}">
-                    <parameter name="rootEnumId"/>
+        <tree name="CategoryTree" open-path="${idPathSb.toString()}">
+            <parameter name="rootEnumId"/>
 
-                    <tree-node name="CategoryNode">
+            <tree-node name="CategoryNode">
 
-                        <label text="${nodeList_entry?.description}"/>
-                        <tree-sub-node node-name="CategoryNode" list="enumList">
-                            <actions>
-                                <set field="parentEnumId" from="nodeList_entry.enumId"/>
-                                <entity-find entity-name="moqui.basic.Enumeration" list="enumList" cache="false">
-                                    <econdition field-name="parentEnumId" from="parentEnumId"/>
-                                </entity-find>
-                            </actions>
-                        </tree-sub-node>
-                    </tree-node>
-                    <tree-sub-node node-name="CategoryNode" list="topLevelEnumList">
-                        <actions>
-                            <entity-find-one entity-name="moqui.basic.Enumeration" value-field="rootEnum" cache="false">
-                                <field-map field-name="enumId" from="rootEnumId"/>
-                            </entity-find-one>
-                            <set field="topLevelEnumList" from="[rootEnum]"/>
-                        </actions>
-                    </tree-sub-node>
-                </tree>
-            </widgets>
-        </section>
-
-        <section name="CREDIT">
-            <actions>
-                <set field="rootEnumId" value="CREDIT"/>
-            </actions>
-            <widgets>
-                <tree name="CategoryTree" open-path="${idPathSb.toString()}">
-                    <parameter name="rootEnumId"/>
-
-                    <tree-node name="CategoryNode">
-
-                        <label text="${nodeList_entry?.description}"/>
-                        <tree-sub-node node-name="CategoryNode" list="enumList">
-                            <actions>
-                                <set field="parentEnumId" from="nodeList_entry.enumId"/>
-                                <entity-find entity-name="moqui.basic.Enumeration" list="enumList" cache="false">
-                                    <econdition field-name="parentEnumId" from="parentEnumId"/>
-                                </entity-find>
-                            </actions>
-                        </tree-sub-node>
-                    </tree-node>
-                    <tree-sub-node node-name="CategoryNode" list="topLevelEnumList">
-                        <actions>
-                            <entity-find-one entity-name="moqui.basic.Enumeration" value-field="rootEnum" cache="false">
-                                <field-map field-name="enumId" from="rootEnumId"/>
-                            </entity-find-one>
-                            <set field="topLevelEnumList" from="[rootEnum]"/>
-                        </actions>
-                    </tree-sub-node>
-                </tree>
-            </widgets>
-        </section>
+                <label text="${nodeList_entry?.description}"/>
+                <tree-sub-node node-name="CategoryNode" list="enumList">
+                    <actions>
+                        <set field="parentEnumId" from="nodeList_entry.enumId"/>
+                        <entity-find entity-name="moqui.basic.Enumeration" list="enumList" cache="false">
+                            <econdition field-name="parentEnumId" from="parentEnumId"/>
+                        </entity-find>
+                    </actions>
+                </tree-sub-node>
+            </tree-node>
+            <tree-sub-node node-name="CategoryNode" list="topLevelEnumList">
+                <actions>
+                    <entity-find entity-name="moqui.basic.Enumeration" list="topLevelEnumList">
+                        <econdition field-name="enumTypeId" value="GlAccountClass"/>
+                        <econdition field-name="parentEnumId" value=""/>
+                    </entity-find>
+                </actions>
+            </tree-sub-node>
+        </tree>
     </widgets>
 </screen>
