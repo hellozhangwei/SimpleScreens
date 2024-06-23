@@ -13,18 +13,44 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
-        default-menu-title="Production Runs" default-menu-include="false">
+        default-menu-title="Find Bom" default-menu-include="false">
 
+    <transition name="createBom">
+        <service-call name="create#mantle.product.ProductAssoc"/>
+        <default-response url="../BomDetail"/>
+    </transition>
     <widgets>
 
         <container-dialog id="NewBomContainer" button-text="New Bom">
 
             <form-single name="NewBomForm" transition="createBom">
+                <field name="productAssocTypeEnumId">
+                    <default-field title="Bom Type">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="ProductAssocType"/><set field="parentEnumId" value="PatComponent"/></widget-template-include>
+                    </default-field>
+                </field>
+                <field name="productId">
+                    <default-field title="To Make">
+                        <text-line/>
+                    </default-field>
+                </field>
+                <field name="toProductId">
+                    <default-field title="Component">
+                        <text-line/>
+                    </default-field>
+                </field>
+                <field name="quantity">
+                    <default-field>
+                        <text-line/>
+                    </default-field>
+                </field>
+
                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
             </form-single>
         </container-dialog>
 
-        <form-list name="BomList" list="bomList" skip-form="true" show-all-button="true" header-dialog="true">
+        <form-list name="BomList" list="bomList" >
             <entity-find entity-name="mantle.product.ProductAssoc" list="bomList" distinct="true">
                 <econdition field-name="productAssocTypeEnumId" operator="in" from="['PatMfgBom', 'PatEngBom']"/>
                 <select-field field-name="productId"/>
@@ -32,12 +58,12 @@ along with this software (see the LICENSE.md file). If not, see
 
             <field name="productId1">
                 <header-field show-order-by="case-insensitive" title="product ID"><text-find size="10" hide-options="true"/></header-field>
-                <default-field><link url="../BomDetail" text="${productId}" link-type="anchor" parameter-map="[productId:productId]"/></default-field>
+                <default-field><link url="../EditBom" text="${productId}" link-type="anchor" parameter-map="[productId:productId, productAssocTypeEnumId:productAssocTypeEnumId]"/></default-field>
             </field>
 
             <field name="productId">
                 <header-field show-order-by="case-insensitive"><text-find size="10" hide-options="true"/></header-field>
-                <default-field><link url="../BomDetail" link-type="anchor" entity-key-name="productId" entity-name="Product" parameter-map="[productId:productId]"/></default-field>
+                <default-field><link url="../EditBom" link-type="anchor" entity-key-name="productId" entity-name="Product" parameter-map="[productId:productId]"/></default-field>
             </field>
 
             <field name="productAssocTypeEnumId">

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-include="false">
+
+    <parameter name="productId"/>
+    <parameter name="productAssocTypeEnumId"/>
+
+    <transition name="updateBom">
+        <service-call name="update#mantle.product.ProductAssoc"/>
+        <default-response url="."/>
+    </transition>
+    <transition name="deleteBomItem">
+        <service-call name="delete#mantle.product.ProductAssoc"/>
+        <default-response url="."/>
+    </transition>
+
+    <transition name="addComponent">
+        <service-call name="create#mantle.product.ProductAssoc"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <!--        <service-call name="mantle.work.ManufacturingServices.get#ProductBomDetail" in-map="[productId:productId]" out-map="context"/>-->
+        <entity-find-one value-field="product" entity-name="mantle.product.Product"/>
+    </actions>
+
+    <widgets>
+        <container style="row">
+            <link url="../BomFind" text="Return to Find Bom" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey"/>
+        </container>
+
+        <label text="Component List: ${product.productName}, ${productAssocTypeEnumId}" type="div" style="row q-mb-md text-h3"/>
+
+        <container-dialog id="NewBomContainer" button-text="Add Component">
+
+            <form-single name="NewBomForm" transition="addComponent">
+                <field name="productAssocTypeEnumId">
+                    <default-field title="Bom Type">
+                        <display-entity entity-name="moqui.basic.Enumeration"/>
+                    </default-field>
+                </field>
+                <field name="productId">
+                    <default-field title="To Make">
+                        <display-entity entity-name="Product" key-field-name="productId"/>
+                    </default-field>
+                </field>
+                <field name="toProductId">
+                    <default-field title="Component">
+                        <text-line/>
+                    </default-field>
+                </field>
+                <field name="quantity">
+                    <default-field>
+                        <text-line/>
+                    </default-field>
+                </field>
+
+                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <form-list name="ProductBomList" list="productBomList" transition="updateBom" multi="true">
+            <entity-find entity-name="mantle.product.ProductAssoc" list="bomList" distinct="true">
+                <econdition field-name="productId"/>
+                <econdition field-name="productAssocTypeEnumId"/><!--operator="in" from="['PatMfgBom', 'PatEngBom']"-->
+            </entity-find>
+            <field name="productId"><default-field><hidden/></default-field></field>
+            <field name="productAssocTypeEnumId"><default-field><hidden/></default-field></field>
+            <field name="toProductIdDisplay">
+                <default-field title="Component ID"><display text="${toProductId}" /></default-field>
+            </field>
+            <field name="toProductId">
+                <default-field title="Component"><display-entity entity-name="Product" key-field-name="productId" /></default-field>
+            </field>
+            <field name="sequenceNum">
+                <default-field><text-line/></default-field>
+            </field>
+            <field name="quantity">
+                <default-field><text-line/></default-field>
+            </field>
+            <field name="fromDate"><default-field><display/></default-field></field>
+            <field name="thruDate"><default-field><date-time/></default-field></field>
+            <field name="deleteLink">
+                <default-field title="">
+                    <link url="deleteBomItem" text="Delete" confirmation="Really Delete?"/>
+                </default-field>
+            </field>
+            <field name="submitButton">
+                <default-field><submit text="Update All"/></default-field></field>
+        </form-list>
+    </widgets>
+</screen>
