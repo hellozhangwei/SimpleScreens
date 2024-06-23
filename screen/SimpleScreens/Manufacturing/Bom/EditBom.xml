@@ -32,6 +32,11 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="."/>
     </transition>
 
+    <transition name="addSubComponent">
+        <service-call name="create#mantle.product.ProductAssoc"/>
+        <default-response url="."/>
+    </transition>
+
     <actions>
         <!--        <service-call name="mantle.work.ManufacturingServices.get#ProductBomDetail" in-map="[productId:productId]" out-map="context"/>-->
         <entity-find-one value-field="product" entity-name="mantle.product.Product"/>
@@ -42,6 +47,7 @@ along with this software (see the LICENSE.md file). If not, see
             <link url="../BomFind" text="Return to Find Bom" icon="fa fa-angle-double-left" link-type="anchor" style="q-mb-md text-grey"/>
         </container>
 
+        <!--todo show bread crumb of bom-->
         <label text="Component List: ${product.productName}, ${productAssocTypeEnumId}" type="div" style="row q-mb-md text-h3"/>
 
         <container-dialog id="NewBomContainer" button-text="Add Component">
@@ -57,17 +63,8 @@ along with this software (see the LICENSE.md file). If not, see
                         <display-entity entity-name="Product" key-field-name="productId"/>
                     </default-field>
                 </field>
-                <field name="toProductId">
-                    <default-field title="Component">
-                        <text-line/>
-                    </default-field>
-                </field>
-                <field name="quantity">
-                    <default-field>
-                        <text-line/>
-                    </default-field>
-                </field>
-
+                <field name="toProductId"><default-field title="Component"><text-line/></default-field></field><!--todo use dropdown-->
+                <field name="quantity"><default-field><text-line/></default-field></field>
                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
             </form-single>
         </container-dialog>
@@ -96,6 +93,27 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="deleteLink">
                 <default-field title="">
                     <link url="deleteBomItem" text="Delete" confirmation="Really Delete?"/>
+                </default-field>
+            </field>
+            <!--todo show sub components count-->
+            <field name="addSubComponent">
+                <default-field title="">
+                    <section name="AddSubComponentSection"><!--this is required to pass form list values to form single-->
+                        <widgets>
+                            <container-dialog id="AddSubComponentDialog" button-text="Add Sub Component">
+                                <form-single name="AddSumComponentForm" transition="addSubComponent">
+                                    <field name="productAssocTypeEnumId"><default-field title="Bom Type"><text-line/></default-field></field>
+                                    <field name="productId" from="toProductId"><default-field title="Component"><text-line/></default-field></field>
+                                    <field name="toProductId" from="''"><default-field title="Sub Component"><text-line/></default-field></field><!--todo use dropdown-->
+                                    <field name="fromDate" from="ec.user.nowTimestamp"><default-field><date-time/></default-field></field>
+                                    <field name="quantity" from="''"><default-field><text-line/></default-field></field>
+                                    <field name="addButton">
+                                        <default-field><submit text="Add"/></default-field></field>
+                                </form-single>
+                            </container-dialog>
+                        </widgets>
+                    </section>
+
                 </default-field>
             </field>
             <field name="submitButton">

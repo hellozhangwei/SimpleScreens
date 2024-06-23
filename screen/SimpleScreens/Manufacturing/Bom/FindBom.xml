@@ -19,10 +19,9 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="create#mantle.product.ProductAssoc"/>
         <default-response url="../BomDetail"/>
     </transition>
+
     <widgets>
-
         <container-dialog id="NewBomContainer" button-text="New Bom">
-
             <form-single name="NewBomForm" transition="createBom">
                 <field name="productAssocTypeEnumId">
                     <default-field title="Bom Type">
@@ -30,27 +29,15 @@ along with this software (see the LICENSE.md file). If not, see
                             <set field="enumTypeId" value="ProductAssocType"/><set field="parentEnumId" value="PatComponent"/></widget-template-include>
                     </default-field>
                 </field>
-                <field name="productId">
-                    <default-field title="To Make">
-                        <text-line/>
-                    </default-field>
-                </field>
-                <field name="toProductId">
-                    <default-field title="Component">
-                        <text-line/>
-                    </default-field>
-                </field>
-                <field name="quantity">
-                    <default-field>
-                        <text-line/>
-                    </default-field>
-                </field>
-
+                <field name="productId"><default-field title="To Make"><text-line/></default-field></field><!--todo use dropdown-->
+                <field name="toProductId"><default-field title="Component"><text-line/></default-field></field><!--todo use dropdown-->
+                <field name="quantity"><default-field><text-line/></default-field></field>
                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
             </form-single>
         </container-dialog>
 
         <form-list name="BomList" list="bomList" >
+            <!--todo how to show top level bom?-->
             <entity-find entity-name="mantle.product.ProductAssoc" list="bomList" distinct="true">
                 <econdition field-name="productAssocTypeEnumId" operator="in" from="['PatMfgBom', 'PatEngBom']"/>
                 <select-field field-name="productId"/>
