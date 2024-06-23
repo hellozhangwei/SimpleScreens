@@ -17,7 +17,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <transition name="createBom">
         <service-call name="create#mantle.product.ProductAssoc"/>
-        <default-response url="../BomDetail"/>
+        <default-response url="../EditBom"/>
     </transition>
 
     <widgets>
