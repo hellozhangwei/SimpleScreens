@@ -31,6 +31,7 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="create#mantle.product.ProductAssoc"/>
         <default-response url="."/>
     </transition>
+    <transition-include name="getProductList" location="component://SimpleScreens/template/product/ProductTransitions.xml"/>
 
     <actions>
         <!--        <service-call name="mantle.work.ManufacturingServices.get#ProductBomDetail" in-map="[productId:productId]" out-map="context"/>-->
@@ -86,7 +87,9 @@ along with this software (see the LICENSE.md file). If not, see
                                 <display-entity entity-name="Product" key-field-name="productId"/>
                             </default-field>
                         </field>
-                        <field name="toProductId"><default-field title="Component"><text-line/></default-field></field><!--todo use dropdown-->
+                        <field name="toProductId"><default-field title="Component">
+                            <drop-down><dynamic-options transition="getProductList" server-search="true" min-length="0" depends-optional="true"/></drop-down>
+                        </default-field></field>
                         <field name="quantity"><default-field><text-line/></default-field></field>
                         <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
                     </form-single>
