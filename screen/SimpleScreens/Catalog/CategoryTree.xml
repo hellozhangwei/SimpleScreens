@@ -56,9 +56,13 @@ along with this software (see the LICENSE.md file). If not, see
                     <parameter name="rootProductCategoryId"/>
 
                     <tree-node name="CategoryNode">
+                        <actions>
+                            <set field="nodeId" from="(treeNodeId == '#' ? '' : treeNodeId + '/') + nodeList_entry?.productCategoryId"/>
+                            <set field="treeOpenPath" from="nodeId"/>
+                        </actions>
                         <link url="editCategory" dynamic-load-id="CategoryDetailContainer"
                               text="${nodeList_entry?.categoryName}"
-                              id="${treeNodeId == '#' ? '' : treeNodeId + '/'}${nodeList_entry?.productCategoryId}">
+                              id="${nodeId}">
                             <parameter name="productCategoryId" from="nodeList_entry?.productCategoryId"/>
                         </link>
                         <tree-sub-node node-name="CategoryNode" list="categoryList">
@@ -76,7 +80,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <field-map field-name="productCategoryId" from="rootProductCategoryId"/>
                             </entity-find-one>
                             <set field="topLevelCategories" from="[rootCategory]"/>
-                            <set field="treeOpenPath" from="rootProductCategoryId"/>
+                            <!--<set field="treeOpenPath" from="rootProductCategoryId"/> only expand root node-->
                            <!-- <entity-find entity-name="mantle.product.category.ProductCategory" list="topLevelCategories">
                                 <econdition field-name="productCategoryId" from="rootProductCategoryId"/>
                             </entity-find>-->
