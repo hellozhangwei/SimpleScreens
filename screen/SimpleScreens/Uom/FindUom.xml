@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
+        default-menu-include="false">
+
+    <widgets>
+        <container style="q-mb-sm">
+        <container-dialog id="NewRequestContainer" button-text="New UOM">
+        </container-dialog>
+        </container>
+        <form-list name="ListUom" list="uomList" skip-form="true" >
+            <entity-find entity-name="moqui.basic.Uom" list="uomList" distinct="true">
+                <search-form-inputs default-order-by="uomTypeEnumId"/>
+            </entity-find>
+
+            <field name="uomId">
+                <header-field title="ID"><text-find size="10" hide-options="true"/></header-field>
+                <default-field><link url="../EditUom" text="${uomId}" link-type="anchor"/></default-field>
+            </field>
+            <field name="description">
+                <header-field show-order-by="true"><text-line size="10"/></header-field>
+                <default-field><link url="../EditUom" text="${description}" link-type="anchor"/></default-field>
+            </field>
+            <field name="abbreviation">
+                <header-field show-order-by="true"><text-line size="10"/></header-field>
+                <default-field><link url="../EditUom" text="${abbreviation}" link-type="anchor"/></default-field>
+            </field>
+
+            <field name="uomTypeEnumId">
+                <header-field title="Type" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="UomType"/><set field="allowEmpty" value="true"/></widget-template-include>
+                </header-field>
+                <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
+            </field>
+
+            <field name="submitButton"><header-field title="Find"><submit/></header-field><default-field>
+                <display text=" "/></default-field></field>
+
+        </form-list>
+    </widgets>
+</screen>
