@@ -120,7 +120,7 @@ along with this software (see the LICENSE.md file). If not, see
             <econdition field-name="contentLocation" operator="not-equals" value=""/>
             <order-by field-name="-contentDate"/>
         </entity-find>
-        <set field="partyContentId" from="contentList?.first?.partyContentId"/>
+        <set field="partyContentId" from="contentList?.first.partyContentId"/>
 
     </actions>
     <widgets>
@@ -133,7 +133,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <image-file url="downloadContent/${partyContentId}/${ec.user.nowTimestamp}"/>
                 <!--<image url="downloadContent/${partyId}" url-type="transition" />-->
             </default-field></field>
-            <!--<field name="submitButton"><default-field><submit text="Save"/></default-field></field>-->
+            <field name="submitButton"><default-field><submit text="Save"/></default-field></field>
         </form-single>
 
         <container-panel id="UserInfoContainer">
